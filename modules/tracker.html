@@ -45,25 +45,54 @@
         <form>
             <div class="container-sm">
                 <label for="titleActivity" class="form-label text-secondary">Title your activity</label>
-                <input type="text" class="form-control" id="titleActivity">
+                <input type="text" class="form-control" id="titleActivity" placeholder="e.g. Post-exam Workout Relief">
+
+                <select class="form-select mt-4" aria-label="Choose your activity">
+                    <option selected disabled>What Activity Did You Do?</option>
+                    <optgroup label="Cardio Exercises">
+                        <option value="1">Running</option>
+                        <option value="2">Jogging</option>
+                        <option value="3">Cycling</option>
+                        <option value="4">Swimming</option>
+                        <option value="5">Hiking</option>
+                        <option value="6">Jumping Jacks</option>
+                        <option value="7">High Knees</option>
+                        <option value="8">Box Jumps</option>
+                      </optgroup>
+                    
+                      <!-- Strength Training -->
+                      <optgroup label="Strength Training">
+                        <option value="9">Weightlifting</option>
+                        <option value="10">Deadlifts</option>
+                        <option value="11">Kettlebell Swings</option>
+                        <option value="12">Bicep Curls</option>
+                        <option value="13">Tricep Dips</option>
+                      </optgroup>
+                    
+                      <!-- Bodyweight Exercises -->
+                      <optgroup label="Bodyweight Exercises">
+                        <option value="14">Push-ups</option>
+                        <option value="15">Pull-ups</option>
+                        <option value="16">Squats</option>
+                        <option value="17">Lunges</option>
+                        <option value="18">Planks</option>
+                        <option value="19">Sit-ups</option>
+                        <option value="20">Mountain Climbers</option>
+                        <option value="21">Burpees</option>
+                        <option value="22">Leg Raises</option>
+                        <option value="23">Glute Bridges</option>
+                      </optgroup>
+                    
+                      <!-- HIIT (High-Intensity Interval Training) -->
+                      <optgroup label="HIIT Workouts">
+                        <option value="24">HIIT</option>
+                        <option value="25">Tabata Training</option>
+                        <option value="26">Circuit Training</option>
+                      </optgroup>
+                  </select>
             </div>
 
-            <form>
-                <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1">
-                </div>
-                <div class="mb-3 form-check">
-                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+            
 
         </form>
     </main>
