@@ -47,10 +47,11 @@
                 <label for="titleActivity" class="form-label text-secondary">Title your activity</label>
                 <input type="text" class="form-control" id="titleActivity" placeholder="e.g. Post-exam Workout Relief">
 
-                <select class="form-select mt-4" aria-label="Choose your activity">
-                    <option selected disabled>What Activity Did You Do?</option>
+                <label for="activityType" class="form-label text-secondary mt-4">What activity did you do?</label>
+                <select class="form-select" aria-label="Choose your activity" id="activityType">
+                    <!-- <option selected disabled>What Activity Did You Do?</option> -->
                     <optgroup label="Cardio Exercises">
-                        <option value="1">Running</option>
+                        <option selected value="1">Running</option>
                         <option value="2">Jogging</option>
                         <option value="3">Cycling</option>
                         <option value="4">Swimming</option>
@@ -101,16 +102,43 @@
                 <label for="datetime" class="text-secondary mt-4 me-2">Date and time</label>
                 <input type="datetime-local" id="datetime" name="datetime">
 
-                <div class="mt-4">
-                    <label for="duration" class="form-label text-secondary">Duration</label>
-                    <div class="input-group">
-                      <input type="number" class="form-control" placeholder="Hours" min="0">
-                      <span class="input-group-text bg-secondary">hr</span>
-                      <input type="number" class="form-control" placeholder="Minutes" min="0" max="59">
-                      <span class="input-group-text bg-secondary">min</span>
+                <div class="d-flex mt-4">
+                    <div class="container">
+                        <label for="duration" class="form-label text-secondary">Duration</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" placeholder="Hours" min="0">
+                            <span class="input-group-text bg-secondary">hr</span>
+                            <input type="number" class="form-control" placeholder="Minutes" min="0" max="59">
+                            <span class="input-group-text bg-secondary">min</span>
+                        </div>
                     </div>
-                  </div>
-                  
+                    <div class="container">
+                        <label for="distance" class="form-label text-secondary">Distance</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" placeholder="Kilometer" min="0">
+                            <span class="input-group-text bg-secondary">km</span>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <label for="speed" class="form-label text-secondary">Speed</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" placeholder="Minute per Kilometer" min="0">
+                            <span class="input-group-text bg-secondary">/km</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mt-4 mx-0">
+                    <label for="satisfaction" class="form-label text-secondary">Satisfaction Level</label>
+                    <input class="container-fluid" type="range" id="satisfaction" min="1" max="100" value="75"
+                        name="satisfaction">
+                </div>
+                <div class="container mt-3">
+                    <label for="notes" class="form-label text-secondary">Leave some notes about your session</label>
+                    <textarea class="form-control" id="notes" name="notes" rows="4"
+                        placeholder="What did you do? How did you feel? Any goals for next time?"></textarea>
+                </div>
+
+
 
             </div>
 
