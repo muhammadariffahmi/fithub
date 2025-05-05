@@ -44,63 +44,65 @@
 
         <form>
             <div class="container-sm">
-                <label for="titleActivity" class="form-label text-secondary">Title your activity</label>
-                <input type="text" class="form-control" id="titleActivity" placeholder="e.g. Post-exam Workout Relief">
 
-                <label for="activityType" class="form-label text-secondary mt-4">What activity did you do?</label>
-                <select class="form-select" aria-label="Choose your activity" id="activityType">
-                    <!-- <option selected disabled>What Activity Did You Do?</option> -->
-                    <optgroup label="Cardio Exercises">
-                        <option selected value="1">Running</option>
-                        <option value="2">Jogging</option>
-                        <option value="3">Cycling</option>
-                        <option value="4">Swimming</option>
-                        <option value="5">Hiking</option>
-                        <option value="6">Jumping Jacks</option>
-                        <option value="7">High Knees</option>
-                        <option value="8">Box Jumps</option>
-                    </optgroup>
+                <div class="container mt-4">
+                    <label for="titleActivity" class="form-label text-secondary">Title your activity</label>
+                    <input type="text" class="form-control" id="titleActivity"
+                        placeholder="e.g. Morning Run with Friends">
+                </div>
 
-                    <!-- Strength Training -->
-                    <optgroup label="Strength Training">
-                        <option value="9">Weightlifting</option>
-                        <option value="10">Deadlifts</option>
-                        <option value="11">Kettlebell Swings</option>
-                        <option value="12">Bicep Curls</option>
-                        <option value="13">Tricep Dips</option>
-                    </optgroup>
+                <div class="container mt-4">
+                    <label for="activityType" class="form-label text-secondary">What activity did you do?</label>
+                    <select class="form-select" aria-label="Choose your activity" id="activityType">
+                        <!-- <option selected disabled>What Activity Did You Do?</option> -->
+                        <optgroup label="Cardio Exercises">
+                            <option selected value="1">Running</option>
+                            <option value="2">Jogging</option>
+                            <option value="3">Cycling</option>
+                            <option value="4">Swimming</option>
+                            <option value="5">Hiking</option>
+                            <option value="6">Jumping Jacks</option>
+                            <option value="7">High Knees</option>
+                            <option value="8">Box Jumps</option>
+                        </optgroup>
 
-                    <!-- Bodyweight Exercises -->
-                    <optgroup label="Bodyweight Exercises">
-                        <option value="14">Push-ups</option>
-                        <option value="15">Pull-ups</option>
-                        <option value="16">Squats</option>
-                        <option value="17">Lunges</option>
-                        <option value="18">Planks</option>
-                        <option value="19">Sit-ups</option>
-                        <option value="20">Mountain Climbers</option>
-                        <option value="21">Burpees</option>
-                        <option value="22">Leg Raises</option>
-                        <option value="23">Glute Bridges</option>
-                    </optgroup>
+                        <!-- Strength Training -->
+                        <optgroup label="Strength Training">
+                            <option value="9">Weightlifting</option>
+                            <option value="10">Deadlifts</option>
+                            <option value="11">Kettlebell Swings</option>
+                            <option value="12">Bicep Curls</option>
+                            <option value="13">Tricep Dips</option>
+                        </optgroup>
 
-                    <!-- HIIT (High-Intensity Interval Training) -->
-                    <optgroup label="HIIT Workouts">
-                        <option value="24">HIIT</option>
-                        <option value="25">Tabata Training</option>
-                        <option value="26">Circuit Training</option>
-                    </optgroup>
-                    <option value="other">Other</option>
-                </select>
+                        <!-- Bodyweight Exercises -->
+                        <optgroup label="Bodyweight Exercises">
+                            <option value="14">Push-ups</option>
+                            <option value="15">Pull-ups</option>
+                            <option value="16">Squats</option>
+                            <option value="17">Lunges</option>
+                            <option value="18">Planks</option>
+                            <option value="19">Sit-ups</option>
+                            <option value="20">Mountain Climbers</option>
+                            <option value="21">Burpees</option>
+                            <option value="22">Leg Raises</option>
+                            <option value="23">Glute Bridges</option>
+                        </optgroup>
+                        
+                        <option value="other">Other</option>
+                    </select>
+                </div>
 
 
-                <div class="mt-4">
+                <div class="container mt-4">
                     <label for="activityImage" class="form-label text-secondary">Upload a photo</label>
                     <input class="form-control" type="file" id="activityImage" accept="image/*">
                 </div>
 
-                <label for="datetime" class="text-secondary mt-4 me-2">Date and time</label>
-                <input type="datetime-local" id="datetime" name="datetime">
+                <div class="container mt-4">
+                    <label for="datetime" class="text-secondary me-2">Date and time</label>
+                    <input type="datetime-local" id="datetime" name="datetime">
+                </div>
 
                 <div class="d-flex mt-4">
                     <div class="container">
@@ -127,6 +129,12 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="container mt-4">
+                    <label for="steps" class="form-label text-secondary">Steps</label>
+                    <input type="number" class="form-control" id="steps" placeholder="Enter your total steps">
+                </div>
+
                 <div class="container mt-4 mx-0">
                     <label for="rate" class="form-label text-secondary">Example range</label>
                     <input type="range" class="form-range" id="rate">
@@ -136,7 +144,7 @@
                         <small>😌 Not bad</small>
                         <small>🔥 Great</small>
                         <small>😎 Crushed it</small>
-                      </div>
+                    </div>
                 </div>
                 <div class="container mt-3">
                     <label for="notes" class="form-label text-secondary">Leave some notes about your session</label>
