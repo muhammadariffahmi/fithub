@@ -1,0 +1,8 @@
+#display {
+    max-height: 500px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center 80%;
+    opacity: 0.5;
+    transform: scaleX(-1);
+  }
