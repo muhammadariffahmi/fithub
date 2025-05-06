@@ -105,6 +105,10 @@
                     <input class="form-control" type="file" id="activityImage" accept="image/*">
                 </div>
 
+                <div id="imagePreview" class="container mt-3"></div>
+
+
+
                 <div class="container mt-4">
                     <label for="datetime" class="text-secondary me-2">Date and time</label>
                     <input type="datetime-local" id="datetime" name="datetime">
@@ -199,6 +203,10 @@
                 </div>
             </div>
         </form>
+
+        <canvas id="resultCanvas" style="display: none;"></canvas>
+        <div class="container mt-3" id="finalImageContainer"></div>
+
 
 
 

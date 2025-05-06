@@ -110,3 +110,73 @@ document.getElementById("addSetBtn").addEventListener("click", function () {
     setsInput.value = parseInt(setsInput.value) + 1; // Increase the sets count
     setsInput.dispatchEvent(new Event("change")); // Re-trigger the change event to add a rep field
 });
+
+
+// IMAGE PREVIEW
+document.getElementById("activityImage").addEventListener("change", function (event) {
+    const file = event.target.files[0];
+    const previewContainer = document.getElementById("imagePreview");
+
+    // Clear previous image (if any)
+    previewContainer.innerHTML = "";
+
+    if (file) {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        img.style.width = "200px"; // 🔹 Smaller preview
+        img.style.borderRadius = "10px";
+        img.style.marginTop = "10px";
+        img.classList.add("img-thumbnail");
+
+        previewContainer.appendChild(img);
+    }
+});
+
+// IMAGE EDIT
+document.querySelector("form").addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent actual submission
+
+    const file = document.getElementById("activityImage").files[0];
+    const title = document.getElementById("titleActivity").value || "My Workout";
+    const datetime = document.getElementById("datetime").value || new Date().toLocaleString();
+
+    if (!file) {
+        alert("Please upload an image first!");
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+        const img = new Image();
+        img.onload = function () {
+            const canvas = document.getElementById("resultCanvas");
+            const ctx = canvas.getContext("2d");
+
+            // Set canvas to match image size
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            // Draw image
+            ctx.drawImage(img, 0, 0);
+
+            // Overlay text
+            ctx.fillStyle = "white";
+            ctx.font = "bold 40px sans-serif";
+            ctx.fillText(title, 30, 50);
+            ctx.font = "30px sans-serif";
+            ctx.fillText(datetime, 30, 100);
+
+            // Show canvas as image
+            const finalImg = new Image();
+            finalImg.src = canvas.toDataURL("image/png");
+            finalImg.classList.add("img-fluid", "mt-3");
+            document.getElementById("finalImageContainer").innerHTML = "";
+            document.getElementById("finalImageContainer").appendChild(finalImg);
+        };
+        img.src = event.target.result;
+    };
+
+    reader.readAsDataURL(file);
+});
+
