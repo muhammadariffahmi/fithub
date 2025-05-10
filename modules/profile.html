@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Profile - FitHub</title>
+  <link href="/css/main.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container mt-5">
+    <h2>User Profile</h2>
+    <form>
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" id="name" value="John Doe">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" value="john@example.com">
+      </div>
+      <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+
+    <hr>
+
+    <form>
+      <h4>Change Password</h4>
+      <div class="mb-3">
+        <label for="currentPassword" class="form-label">Current Password</label>
+        <input type="password" class="form-control" id="currentPassword">
+      </div>
+      <div class="mb-3">
+        <label for="newPassword" class="form-label">New Password</label>
+        <input type="password" class="form-control" id="newPassword">
+      </div>
+      <button type="submit" class="btn btn-warning">Change Password</button>
+    </form>
+
+    <hr>
+
+    <button class="btn btn-danger">Delete Account</button>
+  </div>
+    <div class="text-center mt-5">
+        <a href="/index.html" class="btn btn-primary rounded-pill px-4">Back to Home Page</a>
+</body>
+</html>
