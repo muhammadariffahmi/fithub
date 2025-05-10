@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FitHub - Reminders</title>
+  <link rel="icon" type="image/png" href="/images/logo-round.png" />
+  <link href="/css/main.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8e9dc;
+      color: #a91212;
+    }
+    .navbar, .navbar-nav .nav-link, .navbar-toggler {
+      background-color: #a91212;
+      color: #f8e9dc !important;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #f8e9dc;
+      text-decoration: underline;
+    }
+    .container-fluid.bg-primary,
+    .container-fluid.bg-secondary {
+      background-color: #a91212 !important;
+    }
+    #reminders {
+      background-color: #f8e9dc;
+      border: 2px solid #a91212;
+      border-radius: 10px;
+      padding: 2rem;
+    }
+    h2, h3 {
+      color: #a91212;
+    }
+    #reminder-form input,
+    #reminder-form select,
+    #reminder-form button {
+      border-radius: 10px;
+      border: 1px solid #a91212;
+      background-color: #f8e9dc;
+      color: #a91212;
+    }
+    #reminder-form button {
+      background-color: #a91212;
+      color: #f8e9dc;
+      font-weight: bold;
+    }
+    #reminder-form button:hover {
+      background-color: #7d0f0f;
+    }
+    .list-group-item {
+      background-color: #a91212;
+      color: #f8e9dc;
+      border: none;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .list-group-item:hover {
+      background-color: #7d0f0f;
+    }
+    .list-group-item .btn {
+      background-color: #f8e9dc;
+      color: #a91212;
+      border-radius: 50%;
+    }
+    .list-group-item .btn:hover {
+      background-color: #a91212;
+      color: #f8e9dc;
+    }
+    .text-muted {
+      font-size: 0.9rem;
+      color: #f8e9dc !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container-fluid bg-primary py-2 text-center">
+    <p class="text-light mb-0 fw-bold">WHERE GOALS BECOME GAINS</p>
+  </div>
+
+  <div class="container-fluid bg-secondary text-center py-4">
+    <img src="/images/logo-long.png" alt="FitHub logo" class="img-fluid w-25">
+  </div>
+
+  <nav class="navbar navbar-expand-lg bg-secondary">
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link mx-3 fw-bold" href="/index.html">HOME</a>
+          <a class="nav-link mx-3 fw-bold" href="/modules/tracker.html">FITNESS TRACKER</a>
+          <a class="nav-link mx-3 fw-bold" href="/modules/progress.html">PROGRESS CHARTS</a>
+          <a class="nav-link mx-3 fw-bold" href="/modules/nutrition.html">NUTRITION PLANNER</a>
+          <a class="nav-link mx-3 fw-bold text-primary active" href="/modules/reminders.html">NOTIFICATIONS & REMINDERS</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section id="reminders" class="container py-5">
+    <h2 class="mb-4">Add a Reminder</h2>
+
+
+<form id="reminder-form" class="mb-4">
+  <div class="mb-3">
+    <input type="text" id="reminder-text" class="form-control" placeholder="e.g. 30 min Workout" required />
+  </div>
+
+  <div class="mb-3">
+    <label for="reminder-type" class="form-label">Type:</label>
+    <select id="reminder-type" class="form-select">
+      <option value="text">Text</option>
+      <option value="time">Time-based</option>
+      <option value="activity">Activity-based</option>
+    </select>
+  </div>
+
+  <div class="mb-3">
+    <label for="reminder-category" class="form-label">Category:</label>
+    <select id="reminder-category" class="form-select">
+      <option value="hydration">Hydration</option>
+      <option value="exercise">Exercise</option>
+      <option value="meal">Meal</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label for="reminder-interval" class="form-label">Repeat Interval:</label>
+    <select id="reminder-interval" class="form-select">
+      <option value="none">No Repeat</option>
+      <option value="30">Every 30 minutes</option>
+      <option value="45">Every 45 minutes</option>
+      <option value="60">Every 1 hour</option>
+    </select>
+  </div>
+  
+  <div class="mb-3">
+    <label for="reminder-recurring" class="form-label">Recurring:</label>
+    <div>
+      <input type="radio" id="daily" name="recurring" value="daily"> Daily
+      <input type="checkbox" id="monday" value="Monday"> Monday
+      <input type="checkbox" id="tuesday" value="Tuesday"> Tuesday
+      <input type="checkbox" id="wednesday" value="Wednesday"> Wednesday
+      <input type="checkbox" id="thursday" value="Thursday"> Thursday
+      <input type="checkbox" id="friday" value="Friday"> Friday
+      <input type="checkbox" id="saturday" value="Saturday"> Saturday
+      <input type="checkbox" id="sunday" value="Sunday"> Sunday
+    </div>
+  </div>
+  
+
+  <div class="mb-3">
+    <label for="reminder-time" class="form-label">Set Time:</label>
+    <input type="datetime-local" id="reminder-time" class="form-control" />
+  </div>
+
+  <div class="mb-3">
+    <label for="reminder-duration" class="form-label">Duration:</label>
+    <select id="reminder-duration" class="form-select">
+      <option value="0">No duration</option>
+      <option value="30">30 minutes</option>
+      <option value="60">1 hour</option>
+      <option value="90">1.5 hours</option>
+      <option value="120">2 hours</option>
+    </select>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Add Reminder</button>
+</form>
+
+<h3>Upcoming Reminders</h3>
+<ul id="reminder-list" class="list-group"></ul>
+<button id="voice-input" class="btn btn-secondary mt-3">Voice Input</button>
+```
+
+  </section>
+
+<audio id="reminder-sound" src="/modules/SOUNDS/mixkit-alarm-digital-clock-beep-989.mp3" preload="auto"></audio>
+
+  <script>
+  const form = document.getElementById('reminder-form');
+    const list = document.getElementById('reminder-list');
+    const sound = document.getElementById("reminder-sound");
+    let reminders = [];
+    window.addEventListener('load', () => {
+      const saved = localStorage.getItem('reminders');
+      if (saved) {
+        reminders = JSON.parse(saved);
+        reminders.forEach(createReminderItem);
+      }
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const text = document.getElementById('reminder-text').value;
+      const type = document.getElementById('reminder-type').value;
+      const time = document.getElementById('reminder-time').value;
+      const category = document.getElementById('reminder-category').value;
+   
+      let recurring = 'none'; // Default to 'none'
+     const selectedDays = [];
+
+  if (document.getElementById('daily').checked) {
+    recurring = 'daily';
+  } else {
+    if (document.getElementById('monday').checked) selectedDays.push('Monday');
+    if (document.getElementById('tuesday').checked) selectedDays.push('Tuesday');
+    if (document.getElementById('wednesday').checked) selectedDays.push('Wednesday');
+    if (document.getElementById('thursday').checked) selectedDays.push('Thursday');
+    if (document.getElementById('friday').checked) selectedDays.push('Friday');
+    if (document.getElementById('saturday').checked) selectedDays.push('Saturday');
+    if (document.getElementById('sunday').checked) selectedDays.push('Sunday');
+    
+    if (selectedDays.length > 0) {
+      recurring = selectedDays;  // Store selected days for weekly recurrence
+    }
+  }
+      const duration = document.getElementById('reminder-duration').value;
+      const durationMs = duration * 60 * 1000;
+      const endTime = new Date(time).getTime() + durationMs; // endTime in milliseconds
+      const interval = document.getElementById('reminder-interval').value;
+      const reminderTime = new Date().getTime();
+
+  let nextReminderTime = reminderTime;
+
+  // If there is a repeat interval, calculate the next reminder time
+  if (interval !== "none") {
+    nextReminderTime = reminderTime + (parseInt(interval) * 60 * 1000); // Convert to milliseconds
+  }
+  const reminder = { text, type, time, category, recurring, duration, interval, id: Date.now(), shown: false };
+
+      reminders.push(reminder);
+      saveReminders();
+      createReminderItem(reminder);
+      form.reset();
+    });
+
+    function createReminderItem(reminder) {
+      const li = document.createElement('li');
+      li.className = "list-group-item d-flex justify-content-between align-items-center";
+      li.innerHTML = `
+        <span>
+         ${reminder.text}
+<small class="text-muted">(${reminder.category})</small>
+          <small class="text-muted">(${reminder.type} at ${reminder.time || "N/A"})</small>
+          ${reminder.duration > 0 ? `<small class="text-muted">(Duration: ${reminder.duration} min)</small>` : ''}
+        </span>
+       <button class="btn btn-sm btn-danger delete-btn">×</button>
+      `;
+
+      li.querySelector('.delete-btn').addEventListener('click', () => {
+        list.removeChild(li);
+        reminders = reminders.filter(r => r.id !== reminder.id);
+        saveReminders();
+      });
+
+      list.appendChild(li);
+    }
+
+    function saveReminders() {
+      localStorage.setItem('reminders', JSON.stringify(reminders));
+    }
+
+    // Notification logic
+    if (Notification.permission !== "granted" && Notification.permission !== "denied") {
+      Notification.requestPermission().then(permission => {
+        console.log("Notification permission:", permission);
+      });
+    }
+
+    function showNotification(message) {
+      if (Notification.permission === "granted") {
+        new Notification("Reminder", {
+          body: message,
+          icon: "/images/logo-round.png"
+        });
+      }
+    }
+
+    setInterval(() => {
+  const now = new Date().getTime(); // Get current time in milliseconds
+  const todayDay = new Date().toLocaleString('en-us', { weekday: 'long' }); // Get the current day of the week
+
+  reminders.forEach(reminder => {
+    // Check for daily reminders
+    if (reminder.recurring === 'daily' && !reminder.shown) {
+      const reminderTime = new Date(reminder.time).getTime();
+
+      if (now >= reminderTime) {
+        // Notify with "Great job" message and play sound
+        document.getElementById('reminder-sound').play();
+        showNotification(`🎉 Great job! You've completed your ${reminder.text}`);
+
+        reminder.shown = true;  // Mark as shown
+        saveReminders();
+      }
+    }
+
+    // Check for weekly reminders (specific days)
+    if (Array.isArray(reminder.recurring) && reminder.recurring.includes(todayDay) && !reminder.shown) {
+      const reminderTime = new Date(reminder.time).getTime();
+
+      if (now >= reminderTime) {
+        // Notify with "Great job" message and play sound
+        document.getElementById('reminder-sound').play();
+        showNotification(`🎉 Great job! You've completed your ${reminder.text}`);
+
+        reminder.shown = true;  // Mark as shown
+        saveReminders();
+      }
+    }
+  });
+}, 10000);  // Check every 10 seconds
+
+    // Voice input
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.onresult = function (event) {
+      const transcript = event.results[0][0].transcript;
+      document.getElementById('reminder-text').value = transcript;
+    };
+    document.getElementById('voice-input').addEventListener('click', () => {
+      recognition.start();
+    });
+   
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+    crossorigin="anonymous"></script>
+
+</body>
+</html>
