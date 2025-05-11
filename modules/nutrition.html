@@ -44,16 +44,17 @@
     }
 
     // Function to add meal to favorites
-    function addFavorite(mealId) {
-      if (!favoriteMeals.includes(mealId)) {
-        favoriteMeals.push(mealId);
-        localStorage.setItem('favoriteMeals', JSON.stringify(favoriteMeals));
-        alert("Meal added to favorites!");
-      } else {
-        alert("Meal is already in favorites.");
+      function addFavorite(mealId) {
+        if (!favoriteMeals.includes(mealId)) {
+          favoriteMeals.push(mealId);
+          localStorage.setItem('favoriteMeals', JSON.stringify(favoriteMeals));
+          alert("Meal added to favorites!");
+          renderFavoriteMeals();
+        } else {
+          alert("Meal is already in favorites.");
+        }
       }
-    }
-
+    
     // Meal search functionality
     function searchMeals() {
       let query = document.getElementById("mealSearch").value.toLowerCase();
@@ -68,8 +69,138 @@
       }
     }
 
-    // Call the fetchMeals function when the page loads
-    window.onload = fetchMeals;
+    // Calorie Calculator
+    function calculateCalories() {
+      const goal = document.getElementById('goal').value;
+      let calories;
+  
+      if (goal === 'lose') calories = 1800;
+      else if (goal === 'maintain') calories = 2200;
+      else calories = 2600;
+  
+      document.getElementById('calorieResult').textContent = `You need ${calories} kcal/day.`;
+    }
+  
+    // Render favorite meals
+    function renderFavoriteMeals() {
+      const favList = document.getElementById("favoriteMealsList");
+      favList.innerHTML = ''; // Clear previous
+
+      const favorites = favoriteMeals.map(id => mealData[id]).filter(Boolean);
+      if (favorites.length === 0) {
+        favList.innerHTML = '<p>You have no favorite meals yet.</p>';
+        return;
+      }
+
+    favorites.forEach((meal, index) => {
+      const favCard = `
+        <div class="col-md-4">
+          <div class="card">
+            <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
+            <div class="card-body">
+              <h5 class="card-title">${meal.strMeal}</h5>
+              <p class="card-text">${meal.strCategory}</p>
+              <button class="btn btn-danger" onclick="removeFavorite(${favoriteMeals[index]})">Remove from Favorites</button>
+            </div>
+          </div>
+        </div>
+      `;
+      favList.innerHTML += favCard;
+      });
+    }
+    
+    // Remove favorite meals
+    function removeFavorite(mealId) {
+      favoriteMeals = favoriteMeals.filter(id => id !== mealId);
+      localStorage.setItem('favoriteMeals', JSON.stringify(favoriteMeals));
+      renderFavoriteMeals(); // Update the list
+    }
+
+
+  
+    // Daily Intake Tracker
+    let totalCalories = 0;
+    let dailyIntakeItems = [];
+  
+    function addIntake() {
+      const name = document.getElementById('foodName').value;
+      const cal = parseInt(document.getElementById('foodCalories').value);
+      if (!name || isNaN(cal)) return;
+
+      // Create a new item object
+      const item = {
+        name,
+        calories: cal,
+      };
+
+      // Add the item to the array
+      dailyIntakeItems.push(item);
+
+      const li = document.createElement('li');
+      li.className = 'list-group-item d-flex justify-content-between align-items-center';
+      li.textContent = `${name} - ${cal} kcal`;
+
+      // Create a "Remove" button
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'btn btn-danger btn-sm';
+      removeBtn.textContent = 'Remove';
+      removeBtn.onclick = function() {
+        removeIntake(item); // Remove the item from the array and update the list
+      };
+
+      // Append the remove button to the list item
+      li.appendChild(removeBtn);
+
+      document.getElementById('intakeList').appendChild(li);
+
+      totalCalories += cal;
+      document.getElementById('totalCalories').textContent = totalCalories;
+
+      document.getElementById('foodName').value = '';
+      document.getElementById('foodCalories').value = '';
+    }
+
+    function removeIntake(item) {
+      // Remove the item from the array
+      dailyIntakeItems = dailyIntakeItems.filter(i => i !== item);
+
+      // Recalculate the total calories after removal
+      totalCalories = dailyIntakeItems.reduce((sum, currentItem) => sum + currentItem.calories, 0);
+      document.getElementById('totalCalories').textContent = totalCalories;
+
+      // Re-render the daily intake list
+      renderIntakeList();
+  }
+
+    function renderIntakeList() {
+      const intakeList = document.getElementById('intakeList');
+      intakeList.innerHTML = '';
+
+      dailyIntakeItems.forEach(item => {
+        const li = document.createElement('li');
+        li.className = 'list-group-item d-flex justify-content-between align-items-center';
+        li.textContent = `${item.name} - ${item.calories} kcal`;
+
+        // Create a "Remove" button
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'btn btn-danger btn-sm';
+        removeBtn.textContent = 'Remove';
+        removeBtn.onclick = function() {
+          removeIntake(item);
+        };
+
+        li.appendChild(removeBtn);
+
+        intakeList.appendChild(li);
+      });
+    }
+
+  
+    // Initialize favourites on page load
+    window.onload = function () {
+      fetchMeals();
+      renderFavoriteMeals();
+    }
   </script>
 </head>
 
@@ -100,6 +231,39 @@
       </div>
     </div>
   </nav>
+
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Calorie Calculator</h2>
+        <label for="goal">Fitness Goal:</label>
+        <select id="goal" class="form-select mb-2">
+          <option value="lose">Lose Weight</option>
+          <option value="maintain">Maintain Weight</option>
+          <option value="gain">Gain Muscle</option>
+        </select>
+        <button class="btn btn-success mb-3" onclick="calculateCalories()">Calculate</button>
+        <p id="calorieResult" class="fw-bold"></p>
+      </div>
+  
+    <div class="container mt-5">
+      <h2>Your Favorite Meals</h2>
+      <div class="row" id="favoriteMealsList">
+        <!-- Favorite meals will appear here -->
+      </div>
+    </div>
+  
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <h2>Track Daily Intake</h2>
+        <input type="text" id="foodName" class="form-control mb-2" placeholder="Food name">
+        <input type="number" id="foodCalories" class="form-control mb-2" placeholder="Calories">
+        <button class="btn btn-warning mb-3" onclick="addIntake()">Add to Daily Intake</button>
+        <p>Total Calories Today: <span id="totalCalories" class="fw-bold">0</span> kcal</p>
+        <ul id="intakeList" class="list-group"></ul>
+      </div>
+    </div>
+  </div>
 
   <div class="container mt-5">
     <div class="d-flex justify-content-between mb-4">
