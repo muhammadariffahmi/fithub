@@ -10,7 +10,7 @@
 
 </head>
 
-<body>
+<body class="bg-primary">
 
   <div class="container-fluid bg-primary py-2 d-flex justify-content-center align-items-center text-center">
     <p class="text-light mb-0 fw-bold">WHERE GOALS BECOME GAINS</p>
@@ -32,12 +32,91 @@
           <a class="nav-link mx-3 fw-bold" href="/modules/tracker.html">FITNESS TRACKER</a>
           <a class="nav-link mx-3 fw-bold" href="/modules/progress.html">PROGRESS CHARTS</a>
           <a class="nav-link mx-3 fw-bold" href="/modules/nutrition.html">NUTRITION PLANNER</a>
-          <a class="nav-link mx-3 fw-bold text-primary active" aria-current="page" href="/modules/reminders.html"> NOTIFICATIONS & REMINDERS</a>
+          <a class="nav-link mx-3 fw-bold text-primary active" aria-current="page" href="/modules/reminders.html">
+            NOTIFICATIONS & REMINDERS</a>
         </div>
       </div>
     </div>
   </nav>
 
+  <section id="reminders" class="container py-5">
+    <h2 class="mb-4 text-light">Add a Reminder</h2>
+
+    <form id="reminder-form" class="mb-4">
+      <div class="mb-3">
+        <label for="reminder-text" class="form-label text-secondary">What do you want to be reminded of?</label>
+        <input type="text" id="reminder-text" class="form-control" placeholder="e.g. 30 min Workout" required />
+      </div>
+
+      <div class="mb-3">
+        <label for="reminder-type" class="form-label text-secondary">Type</label>
+        <select id="reminder-type" class="form-select">
+          <option value="text">Quick Note</option>
+          <option value="time">Time-based</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="reminder-category" class="form-label text-secondary">Category</label>
+        <select id="reminder-category" class="form-select">
+          <option value="hydration">Hydration</option>
+          <option value="exercise">Exercise</option>
+          <option value="meal">Meal</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="reminder-interval" class="form-label text-secondary">Repeat Interval</label>
+        <select id="reminder-interval" class="form-select">
+          <option value="none">No Repeat</option>
+          <option value="30">Every 30 minutes</option>
+          <option value="45">Every 45 minutes</option>
+          <option value="60">Every 1 hour</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="reminder-recurring" class="form-label text-secondary">Recurring</label>
+        <div class="text-light">
+          <input type="radio" id="daily" name="recurring" value="daily"> Daily
+          <input type="checkbox" id="monday" value="Monday"> Monday
+          <input type="checkbox" id="tuesday" value="Tuesday"> Tuesday
+          <input type="checkbox" id="wednesday" value="Wednesday"> Wednesday
+          <input type="checkbox" id="thursday" value="Thursday"> Thursday
+          <input type="checkbox" id="friday" value="Friday"> Friday
+          <input type="checkbox" id="saturday" value="Saturday"> Saturday
+          <input type="checkbox" id="sunday" value="Sunday"> Sunday
+        </div>
+      </div>
+
+
+      <div class="mb-3">
+        <label for="reminder-time" class="form-label text-secondary">Set Date and Time:</label>
+        <input type="datetime-local" id="reminder-time" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label for="reminder-duration" class="form-label text-secondary">Duration</label>
+        <select id="reminder-duration" class="form-select">
+          <option value="0">No duration</option>
+          <option value="30">30 minutes</option>
+          <option value="60">1 hour</option>
+          <option value="90">1.5 hours</option>
+          <option value="120">2 hours</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Add Reminder</button>
+    </form>
+
+    <h3 class="text-light">Upcoming Reminders</h3>
+    <ul id="reminder-list" class="list-group"></ul>
+    <button id="voice-input" class="btn btn-secondary mt-3">Voice Input</button>
+    ```
+
+  </section>
+
+  <audio id="reminder-sound" src="/modules/SOUNDS/mixkit-alarm-digital-clock-beep-989.mp3" preload="auto"></audio>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
