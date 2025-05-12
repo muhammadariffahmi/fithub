@@ -1,45 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>User Profile - FitHub</title>
   <link href="/css/main.min.css" rel="stylesheet">
 </head>
-<body class="bg-light">
+
+
+<body
+  style="background-image: url('/images/dumbbell-red.png'); min-height: 100vh;   background-size: cover; background-repeat: no-repeat; background-position: center;">
+
   <div class="container mt-5">
-    <h2>User Profile</h2>
-    <form>
-      <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control" id="name" value="John Doe">
+
+    <div class="bg-secondary p-5 container mt-5 w-50 rounded">
+
+      <div style="text-align: center;">
+        <img src="/images/logo-long.png" alt="FitHub" style="max-height: 60px;" class="mb-4">
       </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" value="john@example.com">
-      </div>
-      <button type="submit" class="btn btn-primary">Update Profile</button>
-    </form>
+
+      <h2>Account Information</h2>
+      <form>
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" value="John Doe">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" value="john@example.com">
+        </div>
+
+        <h2 class="mt-4">Fitness Profile</h2>
+
+        <div class="mb-3">
+          <label for="age" class="form-label">Age</label>
+          <input type="number" class="form-control" id="age" value="22">
+        </div>
+        <div class="mb-3">
+          <label for="weight" class="form-label">Weight</label>
+          <div class="input-group">
+            <input type="number" class="form-control" id="weight" value="70">
+            <span class="input-group-text bg-light">kg</span>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="height" class="form-label">Weight</label>
+          <div class="input-group">
+            <input type="number" class="form-control" id="height" value="175">
+            <span class="input-group-text bg-light">cm</span>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="gender" class="form-label">Gender</label>
+          <div class="d-flex">
+            <div class="form-check me-3">
+              <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" checked>
+              <label class="form-check-label" for="genderMale">
+                Male
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female">
+              <label class="form-check-label" for="genderFemale">
+                Female
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+      </form>
+    </div>
 
     <hr>
+    <div class="bg-secondary p-5 container mt-3 w-50 rounded">
 
-    <form>
-      <h4>Change Password</h4>
-      <div class="mb-3">
-        <label for="currentPassword" class="form-label">Current Password</label>
-        <input type="password" class="form-control" id="currentPassword">
-      </div>
-      <div class="mb-3">
-        <label for="newPassword" class="form-label">New Password</label>
-        <input type="password" class="form-control" id="newPassword">
-      </div>
-      <button type="submit" class="btn btn-warning">Change Password</button>
-    </form>
-
+      <form>
+        <h4>Change Password</h4>
+        <div class="mb-3">
+          <label for="currentPassword" class="form-label">Current Password</label>
+          <input type="password" class="form-control" id="currentPassword">
+        </div>
+        <div class="mb-3">
+          <label for="newPassword" class="form-label">New Password</label>
+          <input type="password" class="form-control" id="newPassword">
+        </div>
+        <button type="submit" class="btn btn-primary">Change Password</button>
+      </form>
+    </div>
     <hr>
 
-    <button class="btn btn-danger">Delete Account</button>
+    <div class=" container mt-2 w-50">
+
+      <button class="btn btn-danger">Delete Account</button>
+    </div>
   </div>
-    <div class="text-center mt-5">
-        <a href="/index.html" class="btn btn-primary rounded-pill px-4">Back to Home Page</a>
+  <div class="text-center mt-5">
+    <a href="/index.html" class="btn btn-primary rounded-pill px-4 mb-5">Back to Home Page</a>
 </body>
+
 </html>

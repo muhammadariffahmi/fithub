@@ -12,14 +12,19 @@
 
 <body>
 
+    <!-- Tagline -->
     <div class="container-fluid bg-primary py-2 d-flex justify-content-center align-items-center text-center">
         <p class="text-light mb-0 fw-bold">WHERE GOALS BECOME GAINS</p>
     </div>
 
+    <!-- FitHub logo -->
     <div class="container-fluid bg-secondary d-flex justify-content-center align-items-center pt-4 pb-2">
-        <img src="/images/logo-long.png" alt="FitHub logo" class="img-fluid w-25">
+        <a href="../index.html" class="d-block" style="text-align: center;">
+            <img src="/images/logo-long.png" alt="FitHub logo" class="img-fluid w-25">
+        </a>
     </div>
 
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-secondary">
         <div class="container-fluid">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
@@ -41,6 +46,7 @@
 
     <main class="bg-primary pb-4">
 
+        <!-- Fitness Tracker title -->
         <div class="container">
             <h2 class="container-sm py-4 text-light">Track the Grind, Celebrate the Wins!</h2>
         </div>
@@ -48,16 +54,17 @@
         <form>
             <div class="container-sm">
 
+                <!-- Activity Title -->
                 <div class="container">
                     <label for="titleActivity" class="form-label text-secondary">Title your activity</label>
                     <input type="text" class="form-control" id="titleActivity"
                         placeholder="e.g., Morning Run with Friends">
                 </div>
 
+                <!-- What activity -->
                 <div class="container mt-4">
                     <label for="activityType" class="form-label text-secondary">What activity did you do?</label>
                     <select class="form-select" aria-label="Choose your activity" id="activityType">
-                        <!-- <option selected disabled>What Activity Did You Do?</option> -->
                         <optgroup label="Cardio Exercises">
                             <option selected value="1">Running</option>
                             <option value="2">Walking</option>
@@ -66,7 +73,6 @@
                             <option value="5">Cycling</option>
                         </optgroup>
 
-                        <!-- Strength Training -->
                         <optgroup label="Strength Training">
                             <option value="6">Weightlifting</option>
                             <option value="7">Deadlifts</option>
@@ -75,7 +81,6 @@
                             <option value="10">Tricep Dips</option>
                         </optgroup>
 
-                        <!-- Bodyweight Exercises -->
                         <optgroup label="Bodyweight Exercises">
                             <option value="11">Push-ups</option>
                             <option value="12">Pull-ups</option>
@@ -93,55 +98,61 @@
                     </select>
                 </div>
 
+                <!-- HIDE, for "other" choice -->
                 <div class="container mt-4" id="otherActivityContainer" style="display: none;">
                     <label for="otherActivity" class="form-label text-secondary">Please specify your activity</label>
                     <input type="text" class="form-control" id="otherActivity"
                         placeholder="e.g. Skateboarding, Martial Arts">
                 </div>
 
-
+                <!-- Upload photo -->
                 <div class="container mt-4">
                     <label for="activityImage" class="form-label text-secondary">Upload a photo</label>
                     <input class="form-control" type="file" id="activityImage" accept="image/*">
                 </div>
-
                 <div id="imagePreview" class="container mt-3"></div>
 
-
-
+                <!-- Date and time -->
                 <div class="container mt-4">
                     <label for="datetime" class="text-secondary me-2">Date and time</label>
                     <input type="datetime-local" id="datetime" name="datetime">
                 </div>
 
+                <!-- The parameter -->
                 <div class="d-flex mt-4">
 
-                    <div class="container" id="duration">
+                    <!-- Duration -->
+                    <div class="container" id="durationContainer">
                         <label for="duration" class="form-label text-secondary">Duration</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" placeholder="Hours" min="0">
+                            <input type="number" id="hours" class="form-control" placeholder="Hours" min="0">
                             <span class="input-group-text bg-secondary">hr</span>
-                            <input type="number" class="form-control" placeholder="Minutes" min="0" max="59">
+                            <input type="number" id="minutes" class="form-control" placeholder="Minutes" min="0"
+                                max="59">
                             <span class="input-group-text bg-secondary">min</span>
-                            <input type="number" class="form-control" placeholder="Seconds" min="0" max="59">
+                            <input type="number" id="seconds" class="form-control" placeholder="Seconds" min="0"
+                                max="59">
                             <span class="input-group-text bg-secondary">sec</span>
                         </div>
                     </div>
-                    <div class="container" id="distance" style="display: none;">
+
+                    <!-- Distance -->
+                    <div class="container" id="distanceContainer">
                         <label for="distance" class="form-label text-secondary">Distance</label>
                         <div class="input-group">
-                            <input type="number" class="form-control" placeholder="Kilometer" min="0">
+                            <input type="number" id="distanceInput" class="form-control" placeholder="Kilometer"
+                                min="0">
                             <span class="input-group-text bg-secondary">km</span>
                         </div>
                     </div>
-                    <div class="container" id="speed" style="display: none;">
-                        <label for="speed" class="form-label text-secondary">Speed</label>
-                        <div class="input-group">
-                            <input type="number" class="form-control" placeholder="Minute per Kilometer" min="0">
-                            <span class="input-group-text bg-secondary">/km</span>
-                        </div>
+
+                    <!-- Speed -->
+                    <div id="speedContainer" class="container">
+                        <label for="speedText" class="form-label text-secondary">Speed</label>
+                        <span id="speedText" class="form-control" readonly>0 km/h</span>
                     </div>
 
+                    <!-- Weight used -->
                     <div class="container" id="weightUsed" style="display: none;">
                         <label for="weight" class="form-label text-secondary">Weight used</label>
                         <div class="d-flex">
@@ -154,19 +165,24 @@
                         </div>
                     </div>
                 </div>
+                <!-- END parameter -->
 
-                <div class="container mt-4" id="steps" style="display: none;">
+                <!-- Steps -->
+                <div class="container mt-4" id="stepsContainer" style="display: none;">
                     <label for="steps" class="form-label text-secondary">Steps</label>
                     <input type="number" class="form-control" id="steps" placeholder="Enter your total steps">
                 </div>
 
+                <!-- Sets and reps -->
                 <div id="setsContainer" style="display: none;">
 
+                    <!-- Sets -->
                     <div class="container mt-4">
                         <label for="sets" class="form-label text-secondary">Number of Sets</label>
                         <input type="number" class="form-control" id="sets" placeholder="e.g., 3" min="1">
                     </div>
 
+                    <!-- Reps -->
                     <div id="repsSection">
                         <div class="container mt-3">
                             <label for="repsSet1" class="form-label text-secondary">Reps for Set 1</label>
@@ -175,13 +191,14 @@
                         <!-- Additional sets will appear dynamically -->
                     </div>
 
+                    <!-- Add set button -->
                     <div class="container mt-4">
                         <button type="button" class="btn btn-secondary" id="addSetBtn">Add Another Set</button>
                     </div>
-
                 </div>
+                <!-- END Sets and reps -->
 
-
+                <!-- Rate session -->
                 <div class="container mt-4 mx-0">
                     <label for="rate" class="form-label text-secondary">Rate your session</label>
                     <input type="range" class="form-range" id="rate">
@@ -193,36 +210,53 @@
                         <small>😎 Crushed it</small>
                     </div>
                 </div>
+
+                <!-- Notes -->
                 <div class="container mt-3">
                     <label for="notes" class="form-label text-secondary">Leave some notes about your session</label>
                     <textarea class="form-control" id="notes" name="notes" rows="4"
                         placeholder="What did you do? How did you feel? Any goals for next time?"></textarea>
                 </div>
+
+                <!-- Submit button -->
                 <div class="container d-flex mt-4 justify-content-end">
                     <input class="btn btn-secondary" type="submit" value="Submit">
                 </div>
             </div>
         </form>
+        <!-- END Form -->
 
-        <canvas id="resultCanvas" style="display: none;"></canvas>
-        <div class="container mt-3" id="finalImageContainer"></div>
-
-        <div class="container mt-3" id="actionButtons" style="display: none;">
-            <button class="btn btn-success me-2" id="downloadBtn">Download Image</button>
-            <button class="btn btn-primary" id="shareFbBtn">Share to Facebook</button>
+        <!-- Calorie result -->
+        <div class="container">
+            <div class="container">
+                <div id="caloriesResult" class="mt-3 text-secondary fw-bold" style="display:none;"></div>
+            </div>
         </div>
-        
 
+        <!-- Edited image display -->
+        <div class="container">
+            <canvas id="resultCanvas" style="display: none;"></canvas>
+            <div class="container mt-3" id="finalImageContainer"></div>
+        </div>
 
-
-
+        <!-- Download button -->
+        <div class="container">
+            <div class="container mt-3" id="actionButtons" style="display: none;">
+                <button class="btn btn-dark me-2" id="downloadBtn">Download Image</button>
+            </div>
+        </div>
     </main>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
-    <script src="/js/tracker.js"></script>
+
+    <script src="/js/tracker/imagePreview.js"></script>
+    <script src="/js/tracker/formDynamic.js"></script>
+    <script src="/js/tracker/speedCalculate.js"></script>
+    <script src="/js/tracker/calorieCalculate.js"></script>
+    <script src="/js/tracker/imageEditDisplay.js"></script>
 
 </body>
 

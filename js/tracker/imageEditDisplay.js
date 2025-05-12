@@ -1,67 +1,6 @@
-
-
-// IMAGE EDIT
 document.querySelector("form").addEventListener("submit", function (e) {
     e.preventDefault(); // Prevent form submission
 
-    const activityType = document.getElementById("activityType").value; // Cardio, Strength, or Bodyweight
-    const duration = parseFloat(document.getElementById("duration").value || "0"); // In minutes
-    const weight = parseFloat(document.getElementById("userWeight").value || "0"); // Weight in kg
-
-    let calories = 0;
-
-    if (activityType === "cardio") {
-        const distance = parseFloat(document.getElementById("distance").value || "0"); // In km
-        const speed = parseFloat(document.getElementById("speed").value || "0"); // In km/h
-        const steps = parseInt(document.getElementById("steps").value || "0"); // Optional
-
-        if (!duration || !distance || !speed) {
-            alert("Please enter duration, distance, and speed for cardio activities.");
-            return;
-        }
-
-        // Example MET calculation based on speed
-        const MET = speed >= 8 ? 8 : speed >= 5 ? 6 : 4;
-        calories = MET * weight * (duration / 60);
-
-    } else if (activityType === "strength") {
-        const sets = parseInt(document.getElementById("sets").value || "0");
-        const reps = parseInt(document.getElementById("reps").value || "0");
-        const weightUsed = parseFloat(document.getElementById("weightUsed").value || "0");
-
-        if (!duration || !sets || !reps || !weightUsed) {
-            alert("Please enter duration, sets, reps, and weight used for strength activities.");
-            return;
-        }
-
-        // Example calorie calculation
-        const strengthFactor = 0.1; // Adjust this based on research
-        calories = sets * reps * weightUsed * strengthFactor;
-
-    } else if (activityType === "bodyweight") {
-        const sets = parseInt(document.getElementById("sets").value || "0");
-        const reps = parseInt(document.getElementById("reps").value || "0");
-
-        if (!duration || !sets || !reps) {
-            alert("Please enter duration, sets, and reps for bodyweight exercises.");
-            return;
-        }
-
-        // Example calorie calculation
-        const bodyweightFactor = 0.2; // Adjust this based on activity intensity
-        calories = sets * reps * bodyweightFactor * (duration / 60);
-
-    } else {
-        alert("Invalid activity type. Please select Cardio, Strength, or Bodyweight.");
-        return;
-    }
-
-    // Display calculated calories
-    const calorieDisplay = document.getElementById("caloriesResult");
-    calorieDisplay.textContent = `Calories Burned: ~${Math.round(calories)} kcal`;
-    calorieDisplay.style.display = "block";
-
-    // Image generation
     const file = document.getElementById("activityImage").files[0];
     const title = document.getElementById("titleActivity").value || "My Workout";
 
@@ -120,7 +59,7 @@ document.querySelector("form").addEventListener("submit", function (e) {
             const logo = new Image();
             logo.src = "/images/logo-long-white.png"; // Path to your logo
             logo.onload = function () {
-                const desiredWidth = 150; // Adjust this size as needed
+                const desiredWidth = 170; // Adjust this size as needed
                 const aspectRatio = logo.height / logo.width;
                 const logoWidth = desiredWidth;
                 const logoHeight = desiredWidth * aspectRatio;
@@ -160,30 +99,3 @@ document.querySelector("form").addEventListener("submit", function (e) {
 
     reader.readAsDataURL(file);
 });
-
-
-
-// Show the action buttons
-// document.getElementById("actionButtons").style.display = "block";
-
-// // Handle Download
-// document.getElementById("downloadBtn").addEventListener("click", function () {
-//     const link = document.createElement("a");
-//     link.href = canvas.toDataURL("image/png");
-//     link.download = `${title.replace(/\s+/g, "_")}_FitHub.png`;
-//     link.click();
-// });
-
-// Handle Share to Facebook
-document.getElementById("shareFbBtn").addEventListener("click", function () {
-    const dataUrl = canvas.toDataURL("image/png");
-
-    // Convert image to blob to upload if needed, but Facebook doesn't support direct blob sharing.
-    // So we recommend uploading the image to your server and then sharing that URL.
-
-    alert("For Facebook sharing, please upload the image to your server first and share the link.");
-});
-
-
-
-

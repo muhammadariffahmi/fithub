@@ -2,31 +2,38 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FitHub</title>
   <link rel="icon" type="image/png" href="/images/logo-round.png" />
-  <link href="/css/main.min.css" rel="stylesheet">
-
+  <link href="/css/main.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+    crossorigin="anonymous"></script>
 </head>
 
 <body class="bg-primary">
 
+  <!-- Top Banner -->
   <div class="container-fluid bg-primary py-2 d-flex justify-content-center align-items-center text-center">
     <p class="text-light mb-0 fw-bold">WHERE GOALS BECOME GAINS</p>
   </div>
 
+  <!-- Logo -->
   <div class="container-fluid bg-secondary d-flex justify-content-center align-items-center pt-4 pb-2">
-    <img src="/images/logo-long.png" alt="FitHub logo" class="img-fluid w-25">
+    <a href="../index.html" class="d-block" style="text-align: center;">
+      <img src="/images/logo-long.png" alt="FitHub logo" class="img-fluid w-25">
+    </a>
   </div>
 
+  <!-- Navigation -->
   <nav class="navbar navbar-expand-lg bg-secondary">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse  justify-content-center" id="navbarNavAltMarkup">
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link mx-3 fw-bold" href="/index.html">HOME</a>
           <a class="nav-link mx-3 fw-bold" href="/modules/tracker.html">FITNESS TRACKER</a>
@@ -39,22 +46,23 @@
     </div>
   </nav>
 
+  <!-- Main Section -->
   <section id="reminders" class="container py-5">
     <h2 class="mb-4 text-light">Add a Reminder</h2>
 
     <form id="reminder-form" class="mb-4">
       <div class="mb-3">
         <label for="reminder-text" class="form-label text-secondary">What do you want to be reminded of?</label>
-        <input type="text" id="reminder-text" class="form-control" placeholder="e.g. 30 min Workout" required />
+        <div class="d-flex">
+          <input type="text" id="reminder-text" class="form-control w-75" placeholder="e.g. 30 min Workout" required />
+          <button id="voice-input" class="btn btn-secondary w-25 ms-2">Voice Input</button>
+        </div>
+
+
+
       </div>
 
-      <div class="mb-3">
-        <label for="reminder-type" class="form-label text-secondary">Type</label>
-        <select id="reminder-type" class="form-select">
-          <option value="text">Quick Note</option>
-          <option value="time">Time-based</option>
-        </select>
-      </div>
+
 
       <div class="mb-3">
         <label for="reminder-category" class="form-label text-secondary">Category</label>
@@ -65,6 +73,51 @@
           <option value="other">Other</option>
         </select>
       </div>
+
+      <div class="mb-3">
+        <label for="reminder-time" class="form-label text-secondary">Set Date and Time:</label>
+        <input type="datetime-local" id="reminder-time" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label text-secondary">Recurring</label>
+        <div class="text-light d-flex gap-4 mb-2">
+          <div class="form-check">
+            <input type="radio" id="daily" name="recurring" value="daily" class="form-check-input" checked />
+            <label class="form-check-label" for="daily">Daily</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" id="recurring-custom" name="recurring" value="custom" class="form-check-input" />
+            <label class="form-check-label" for="recurring-custom">Custom Days</label>
+          </div>
+        </div>
+
+        <!-- Custom Weekday Checkboxes -->
+        <div id="custom-days" class="d-flex flex-wrap gap-3 ps-3 text-light" style="display: none;">
+          <div class="form-check"><input type="checkbox" id="monday" value="Monday" class="form-check-input" />
+            <label class="form-check-label" for="monday">Mon</label>
+          </div>
+          <div class="form-check"><input type="checkbox" id="tuesday" value="Tuesday" class="form-check-input" />
+            <label class="form-check-label" for="tuesday">Tue</label>
+          </div>
+          <div class="form-check"><input type="checkbox" id="wednesday" value="Wednesday" class="form-check-input" />
+            <label class="form-check-label" for="wednesday">Wed</label>
+          </div>
+          <div class="form-check"><input type="checkbox" id="thursday" value="Thursday" class="form-check-input" />
+            <label class="form-check-label" for="thursday">Thu</label>
+          </div>
+          <div class="form-check"><input type="checkbox" id="friday" value="Friday" class="form-check-input" />
+            <label class="form-check-label" for="friday">Fri</label>
+          </div>
+          <div class="form-check"><input type="checkbox" id="saturday" value="Saturday" class="form-check-input" />
+            <label class="form-check-label" for="saturday">Sat</label>
+          </div>
+          <div class="form-check"><input type="checkbox" id="sunday" value="Sunday" class="form-check-input" />
+            <label class="form-check-label" for="sunday">Sun</label>
+          </div>
+        </div>
+      </div>
+
       <div class="mb-3">
         <label for="reminder-interval" class="form-label text-secondary">Repeat Interval</label>
         <select id="reminder-interval" class="form-select">
@@ -73,26 +126,6 @@
           <option value="45">Every 45 minutes</option>
           <option value="60">Every 1 hour</option>
         </select>
-      </div>
-
-      <div class="mb-3">
-        <label for="reminder-recurring" class="form-label text-secondary">Recurring</label>
-        <div class="text-light">
-          <input type="radio" id="daily" name="recurring" value="daily"> Daily
-          <input type="checkbox" id="monday" value="Monday"> Monday
-          <input type="checkbox" id="tuesday" value="Tuesday"> Tuesday
-          <input type="checkbox" id="wednesday" value="Wednesday"> Wednesday
-          <input type="checkbox" id="thursday" value="Thursday"> Thursday
-          <input type="checkbox" id="friday" value="Friday"> Friday
-          <input type="checkbox" id="saturday" value="Saturday"> Saturday
-          <input type="checkbox" id="sunday" value="Sunday"> Sunday
-        </div>
-      </div>
-
-
-      <div class="mb-3">
-        <label for="reminder-time" class="form-label text-secondary">Set Date and Time:</label>
-        <input type="datetime-local" id="reminder-time" class="form-control" />
       </div>
 
       <div class="mb-3">
@@ -106,21 +139,178 @@
         </select>
       </div>
 
-      <button type="submit" class="btn btn-primary">Add Reminder</button>
+      <button type="submit" class="btn btn-secondary mt-2 mb-4">Add Reminder</button>
     </form>
 
     <h3 class="text-light">Upcoming Reminders</h3>
     <ul id="reminder-list" class="list-group"></ul>
-    <button id="voice-input" class="btn btn-secondary mt-3">Voice Input</button>
-    ```
 
   </section>
 
-  <audio id="reminder-sound" src="/modules/SOUNDS/mixkit-alarm-digital-clock-beep-989.mp3" preload="auto"></audio>
+  <!-- Alarm Sound -->
+  <audio id="reminder-sound" src="/sounds/alarm.mp3" preload="auto"></audio>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
-    crossorigin="anonymous"></script>
+  <script>
+    const form = document.getElementById('reminder-form');
+    const list = document.getElementById('reminder-list');
+    const sound = document.getElementById("reminder-sound");
+    let reminders = [];
+    window.addEventListener('load', () => {
+      const saved = localStorage.getItem('reminders');
+      if (saved) {
+        reminders = JSON.parse(saved);
+        reminders.forEach(createReminderItem);
+      }
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const text = document.getElementById('reminder-text').value;
+      const time = document.getElementById('reminder-time').value;
+      const category = document.getElementById('reminder-category').value;
+
+      let recurring = 'none'; // Default to 'none'
+      const selectedDays = [];
+
+      if (document.getElementById('daily').checked) {
+        recurring = 'daily';
+      } else {
+        if (document.getElementById('monday').checked) selectedDays.push('Monday');
+        if (document.getElementById('tuesday').checked) selectedDays.push('Tuesday');
+        if (document.getElementById('wednesday').checked) selectedDays.push('Wednesday');
+        if (document.getElementById('thursday').checked) selectedDays.push('Thursday');
+        if (document.getElementById('friday').checked) selectedDays.push('Friday');
+        if (document.getElementById('saturday').checked) selectedDays.push('Saturday');
+        if (document.getElementById('sunday').checked) selectedDays.push('Sunday');
+
+        if (selectedDays.length > 0) {
+          recurring = selectedDays;  // Store selected days for weekly recurrence
+        }
+      }
+      const duration = document.getElementById('reminder-duration').value;
+      const durationMs = duration * 60 * 1000;
+      const endTime = new Date(time).getTime() + durationMs; // endTime in milliseconds
+      const interval = document.getElementById('reminder-interval').value;
+      const reminderTime = new Date().getTime();
+
+      let nextReminderTime = reminderTime;
+
+      // If there is a repeat interval, calculate the next reminder time
+      if (interval !== "none") {
+        nextReminderTime = reminderTime + (parseInt(interval) * 60 * 1000); // Convert to milliseconds
+      }
+      const reminder = { text, time, category, recurring, duration, interval, id: Date.now(), shown: false };
+
+      reminders.push(reminder);
+      saveReminders();
+      createReminderItem(reminder);
+      form.reset();
+    });
+
+    function createReminderItem(reminder) {
+      const li = document.createElement('li');
+      li.className = "list-group-item d-flex justify-content-between align-items-center";
+
+      // Format the reminder time
+      const reminderTime = new Date(reminder.time);
+      const formattedTime = reminderTime.toLocaleString('en-US', {
+        weekday: 'short', // e.g., "Mon"
+        year: 'numeric',
+        month: 'short', // e.g., "May"
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true, // 12-hour clock
+      });
+
+      li.innerHTML = `
+    <span>
+      ${reminder.text}
+      <small class="text-muted">(${reminder.category})</small>
+      <small class="text-muted">(${formattedTime})</small>
+      ${reminder.duration > 0 ? `<small class="text-muted">(Duration: ${reminder.duration} min)</small>` : ''}
+    </span>
+    <button class="btn btn-sm btn-danger delete-btn">×</button>
+  `;
+
+      li.querySelector('.delete-btn').addEventListener('click', () => {
+        list.removeChild(li);
+        reminders = reminders.filter(r => r.id !== reminder.id);
+        saveReminders();
+      });
+
+      list.appendChild(li);
+    }
+
+
+    function saveReminders() {
+      localStorage.setItem('reminders', JSON.stringify(reminders));
+    }
+
+    // Notification logic
+    if (Notification.permission !== "granted" && Notification.permission !== "denied") {
+      Notification.requestPermission().then(permission => {
+        console.log("Notification permission:", permission);
+      });
+    }
+
+    function showNotification(message) {
+      if (Notification.permission === "granted") {
+        new Notification("Reminder", {
+          body: message,
+          icon: "/images/logo-round.png"
+        });
+      }
+    }
+
+    setInterval(() => {
+      const now = new Date().getTime(); // Get current time in milliseconds
+      const todayDay = new Date().toLocaleString('en-us', { weekday: 'long' }); // Get the current day of the week
+
+      reminders.forEach(reminder => {
+        // Check for daily reminders
+        if (reminder.recurring === 'daily' && !reminder.shown) {
+          const reminderTime = new Date(reminder.time).getTime();
+
+          if (now >= reminderTime) {
+            // Notify with "Great job" message and play sound
+            document.getElementById('reminder-sound').play();
+            showNotification(`🎉 Great job! You've completed your ${reminder.text}`);
+
+            reminder.shown = true;  // Mark as shown
+            saveReminders();
+          }
+        }
+
+        // Check for weekly reminders (specific days)
+        if (Array.isArray(reminder.recurring) && reminder.recurring.includes(todayDay) && !reminder.shown) {
+          const reminderTime = new Date(reminder.time).getTime();
+
+          if (now >= reminderTime) {
+            // Notify with "Great job" message and play sound
+            document.getElementById('reminder-sound').play();
+            showNotification(`🎉 Great job! You've completed your ${reminder.text}`);
+
+            reminder.shown = true;  // Mark as shown
+            saveReminders();
+          }
+        }
+      });
+    }, 10000);  // Check every 10 seconds
+
+    // Voice input
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.onresult = function (event) {
+      const transcript = event.results[0][0].transcript;
+      document.getElementById('reminder-text').value = transcript;
+    };
+    document.getElementById('voice-input').addEventListener('click', () => {
+      recognition.start();
+    });
+  </script>
+
+
 </body>
 
 </html>
