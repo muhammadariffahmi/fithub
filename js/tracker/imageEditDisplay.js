@@ -24,7 +24,7 @@ document.querySelector("form").addEventListener("submit", function (e) {
         }).replace(",", " |");
 
     if (!file) {
-        alert("Please upload an image first!");
+        // alert("Please upload an image first!");
         return;
     }
 

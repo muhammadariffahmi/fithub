@@ -39,6 +39,8 @@
                     <a class="nav-link mx-3 fw-bold" href="/modules/progress.html">PROGRESS CHARTS</a>
                     <a class="nav-link mx-3 fw-bold" href="/modules/nutrition.html">NUTRITION PLANNER</a>
                     <a class="nav-link mx-3 fw-bold" href="/modules/reminders.html"> NOTIFICATIONS & REMINDERS</a>
+                    <a class="nav-link mx-3 fw-bold" href="/modules/Profile/profile.html">MANAGE PROFILE</a>
+
                 </div>
             </div>
         </div>
@@ -233,6 +235,14 @@
             </div>
         </div>
 
+        <!-- How we calculate -->
+        <div class="container">
+            <div class="container">
+                <p><a class="text-light" id="howCalculateBurnt" href="#" data-bs-toggle="modal"
+                        data-bs-target="#calorieBurntModal" style="display:none;">How we calculate it?</a></p>
+            </div>
+        </div>
+
         <!-- Edited image display -->
         <div class="container">
             <canvas id="resultCanvas" style="display: none;"></canvas>
@@ -256,6 +266,48 @@
 
     </main>
 
+    <!-- Calorie Burnt Modal -->
+    <div class="modal fade" id="calorieBurntModal" tabindex="-1" aria-labelledby="calorieBurntModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-light text-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="calorieBurntModalLabel">How We Estimate Calories Burned</h5>
+                    <button type="button" class="btn-close bg-light" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>💡 Cardio Activities (e.g., Running, Cycling):</strong></p>
+                    <p>We use a standard formula based on the <em>MET value</em> (Metabolic Equivalent of Task):</p>
+                    <code>Calories = (MET × 3.5 × weight in kg ÷ 200) × duration in minutes</code>
+                    <p>For most cardio, we assume a MET value of <strong>7</strong>.</p>
+
+                    <hr>
+
+                    <p><strong>🏋️ Strength Training:</strong></p>
+                    <p>We estimate using this simple rule:</p>
+                    <code>Calories = Sets × Total Reps × 0.5</code>
+                    <p>This gives a rough estimate of calories burned from weightlifting and similar activities.</p>
+
+                    <hr>
+
+                    <p><strong>🤸 Bodyweight Exercises:</strong></p>
+                    <p>Since these use your own body mass, we apply:</p>
+                    <code>Calories = Sets × Total Reps × 0.4</code>
+
+                    <hr>
+
+                    <p class="mb-0"><strong>⚠️ Note:</strong> These are estimates and may vary based on intensity,
+                        technique, rest time, and fitness level. Body weight is retrieved from your profile settings.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Got it!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
@@ -265,9 +317,7 @@
     <script src="/js/tracker/formDynamic.js"></script>
     <script src="/js/tracker/speedCalculate.js"></script>
     <script src="/js/tracker/calorieCalculate.js"></script>
-    <!-- <script src="/js/tracker/handleSubmit.js"></script> -->
     <script src="/js/tracker/imageEditDisplay.js"></script>
-    <!-- <script src="/js/tracker/displayActivities.js"></script> -->
 
 
 </body>

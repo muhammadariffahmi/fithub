@@ -99,7 +99,7 @@ function addFavorite(mealId) {
     if (!favoriteMeals.includes(mealId)) {
         favoriteMeals.push(mealId);
         localStorage.setItem('favoriteMeals', JSON.stringify(favoriteMeals));
-        alert("Meal added to favorites!");
+        // alert("Meal added to favorites!");
         renderFavoriteMeals();
     } else {
         alert("Meal is already in favorites.");
@@ -134,7 +134,7 @@ function renderFavoriteMeals() {
     favorites.forEach((meal, index) => {
         const favCard = `
         <div class="col-md-4">
-          <div class="card">
+          <div class="card mb-4">
             <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
             <div class="card-body">
               <h5 class="card-title">${meal.strMeal}</h5>

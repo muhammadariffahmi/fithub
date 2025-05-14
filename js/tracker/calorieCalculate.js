@@ -3,9 +3,10 @@ document.querySelector("form").addEventListener("submit", function (e) {
 
     const activityId = parseInt(document.getElementById("activityType").value, 10);
     const caloriesResult = document.getElementById("caloriesResult");
+    const howCalculateBurnt = document.getElementById("howCalculateBurnt");
 
     let duration = getDurationInMinutes();
-    let weight = parseFloat(document.getElementById("weight").value) || 70; // default to 70kg
+    let weight = parseFloat(localStorage.getItem("weight")) || 70;
     let sets = parseInt(document.getElementById("sets")?.value || 0);
     let repsInputs = document.querySelectorAll("#repsSection input");
     let totalReps = Array.from(repsInputs).reduce((sum, input) => sum + parseInt(input.value || 0), 0);
@@ -29,8 +30,9 @@ document.querySelector("form").addEventListener("submit", function (e) {
     }
 
     // Format result
-    caloriesResult.textContent = `🔥 Estimated Calories Burned: ${calories.toFixed(1)} kcal`;
+    caloriesResult.textContent = `Estimated Calories Burned: ${calories.toFixed(1)} kcal`;
     caloriesResult.style.display = "block";
+    howCalculateBurnt.style.display = "block";
 });
 
 function getDurationInMinutes() {

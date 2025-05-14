@@ -39,35 +39,44 @@
           <a class="nav-link mx-3 fw-bold text-primary active" aria-current="page"
             href="/modules/nutrition.html">NUTRITION PLANNER</a>
           <a class="nav-link mx-3 fw-bold" href="/modules/reminders.html">NOTIFICATIONS & REMINDERS</a>
+          <a class="nav-link mx-3 fw-bold" href="/modules/Profile/profile.html">MANAGE PROFILE</a>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- Calorie calculator -->
   <div class="container mt-5">
     <div class="row">
-      <div class="col-md-6">
-        <h2 class="text-light">Calorie Calculator</h2>
+
+      <!-- Calorie calculator -->
+      <div class="col-md-6 bg-light px-5 pb-3 pt-4 rounded">
+
+        <div class="d-flex justify-content-between">
+          <h2 class="text-dark">Calorie Calculator</h2>
+          <a href="#" data-bs-toggle="modal" data-bs-target="#bmrModal"><i class="bi bi-info-circle-fill fs-4 text-dark"></i></a>
+        </div>
 
         <!-- Form -->
-        <label for="goal" class="text-secondary">Fitness Goal:</label>
+        <label for="goal" class="text-dark mt-2">Your Fitness Goal:</label>
         <select id="goal" class="form-select mb-2 mt-1">
           <option value="lose">Lose Weight</option>
           <option value="maintain">Maintain Weight</option>
           <option value="gain">Gain Muscle</option>
         </select>
 
+        <!-- How to calculate -->
+        <!-- <p><a class="text-dark" href="#" data-bs-toggle="modal" data-bs-target="#bmrModal">How we calculate it?</a></p> -->
+
         <!-- Calculate button -->
-        <button class="btn btn-secondary mb-3" id="calculateBtn">Calculate</button>
+        <button class="btn btn-secondary mt-1" id="calculateBtn">Calculate</button>
 
         <!-- Calorie result -->
-        <p id="calorieResult" class="fw-bold text-secondary"></p>
+        <p id="calorieResult" class="fw-bold text-primary mt-2"></p>
       </div>
 
       <!-- Favourite meals -->
       <div class="container mt-3">
-        <h2 class="text-light">Your Favorite Meals</h2>
+        <h2 class="text-light mt-3">Your Favorite Meals</h2>
         <div class="row" id="favoriteMealsList">
           <!-- Favorite meals will appear here -->
         </div>
@@ -121,6 +130,33 @@
         </div>
       </div>
     </div>
+
+    <!-- BMR Explanation Modal -->
+    <div class="modal fade" id="bmrModal" tabindex="-1" aria-labelledby="bmrModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content bg-light">
+          <div class="modal-header">
+            <h5 class="modal-title" id="bmrModalLabel">How We Calculate Calories</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-dark">
+            <p><strong>We use the Mifflin-St Jeor Equation to calculate BMR (Basal Metabolic Rate):</strong></p>
+            <ul>
+              <li><strong>For males:</strong> BMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age) + 5</li>
+              <li><strong>For females:</strong> BMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age) − 161</li>
+            </ul>
+            <p>Then we adjust based on your fitness goal:</p>
+            <ul>
+              <li><strong>Lose weight:</strong> BMR - 500 + calories burnt</li>
+              <li><strong>Maintain:</strong> BMR + calories burnt</li>
+              <li><strong>Gain muscle:</strong> BMR + 500 + calories burnt</li>
+            </ul>
+            <p>This gives a rough estimate of how many calories you need per day.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
