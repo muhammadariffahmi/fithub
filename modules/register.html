@@ -8,34 +8,41 @@
   <link href="/css/styles.css" rel="stylesheet">
 </head>
 
-<header>
-
-
-
-</header>
-
 <body
   style="background-image: url('/images/dumbbell-red.png'); min-height: 100vh;   background-size: cover; background-repeat: no-repeat; background-position: center;">
+
+  <!-- Container background -->
   <div class="bg-secondary p-5 container mt-5 w-50 rounded">
 
+    <!-- Logo -->
     <div style="text-align: center;">
       <img src="/images/logo-long.png" alt="FitHub" style="max-height: 90px;" class="mb-4">
     </div>
 
     <h2 class="text-center mb-4">Create Account</h2>
+
+    <!-- Form -->
     <form action="/register" method="POST">
+
+      <!-- Name -->
       <div class="mb-3">
         <label for="name" class="form-label">Name</label>
         <input type="text" class="form-control" id="name" name="name" required>
       </div>
+
+      <!-- Email -->
       <div class="mb-3">
         <label for="email" class="form-label">Email address</label>
         <input type="email" class="form-control" id="email" name="email" required>
       </div>
+
+      <!-- Password -->
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
         <input type="password" class="form-control" id="password" name="password" required>
       </div>
+
+      <!-- Submit button -->
       <button type="submit" class="btn btn-primary w-100">Register</button>
     </form>
 

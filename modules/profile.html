@@ -13,18 +13,25 @@
 
   <div class="container mt-5">
 
+    <!-- Container background -->
     <div class="bg-secondary p-5 container mt-5 w-50 rounded">
 
+      <!-- Logo -->
       <div style="text-align: center;">
         <img src="/images/logo-long.png" alt="FitHub" style="max-height: 60px;" class="mb-4">
       </div>
 
       <h2>Account Information</h2>
-      <form>
+
+      <form id="profile">
+
+        <!-- Name -->
         <div class="mb-3">
           <label for="name" class="form-label">Name</label>
           <input type="text" class="form-control" id="name" value="John Doe">
         </div>
+
+        <!-- Email -->
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
           <input type="email" class="form-control" id="email" value="john@example.com">
@@ -32,10 +39,13 @@
 
         <h2 class="mt-4">Fitness Profile</h2>
 
+        <!-- Age -->
         <div class="mb-3">
           <label for="age" class="form-label">Age</label>
           <input type="number" class="form-control" id="age" value="22">
         </div>
+
+        <!-- Weight -->
         <div class="mb-3">
           <label for="weight" class="form-label">Weight</label>
           <div class="input-group">
@@ -43,14 +53,17 @@
             <span class="input-group-text bg-light">kg</span>
           </div>
         </div>
+
+        <!-- Height -->
         <div class="mb-3">
-          <label for="height" class="form-label">Weight</label>
+          <label for="height" class="form-label">Height</label>
           <div class="input-group">
             <input type="number" class="form-control" id="height" value="175">
             <span class="input-group-text bg-light">cm</span>
           </div>
         </div>
 
+        <!-- Gender -->
         <div class="mb-3">
           <label for="gender" class="form-label">Gender</label>
           <div class="d-flex">
@@ -67,11 +80,9 @@
               </label>
             </div>
           </div>
-
         </div>
 
-
-
+        <!-- Submit button -->
         <button type="submit" class="btn btn-primary">Update Profile</button>
       </form>
     </div>
@@ -101,6 +112,8 @@
   </div>
   <div class="text-center mt-5">
     <a href="/index.html" class="btn btn-primary rounded-pill px-4 mb-5">Back to Home Page</a>
+    <script src="/js/profile.js"></script>
+
 </body>
 
 </html>

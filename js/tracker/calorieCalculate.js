@@ -39,3 +39,8 @@ function getDurationInMinutes() {
     const sec = parseInt(document.getElementById("seconds").value) || 0;
     return hr * 60 + min + sec / 60;
 }
+
+
+
+
+

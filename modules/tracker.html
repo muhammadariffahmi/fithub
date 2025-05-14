@@ -51,7 +51,7 @@
             <h2 class="container-sm py-4 text-light">Track the Grind, Celebrate the Wins!</h2>
         </div>
 
-        <form>
+        <form id="activityForm">
             <div class="container-sm">
 
                 <!-- Activity Title -->
@@ -245,6 +245,15 @@
                 <button class="btn btn-dark me-2" id="downloadBtn">Download Image</button>
             </div>
         </div>
+
+        <!-- Display submitted activities -->
+        <div class="container">
+            <div class="container mt-5">
+                <h3 class="text-light">Your Logged Activities</h3>
+                <div id="activityList" class="text-primary"></div>
+            </div>
+        </div>
+
     </main>
 
 
@@ -256,7 +265,10 @@
     <script src="/js/tracker/formDynamic.js"></script>
     <script src="/js/tracker/speedCalculate.js"></script>
     <script src="/js/tracker/calorieCalculate.js"></script>
+    <!-- <script src="/js/tracker/handleSubmit.js"></script> -->
     <script src="/js/tracker/imageEditDisplay.js"></script>
+    <!-- <script src="/js/tracker/displayActivities.js"></script> -->
+
 
 </body>
 

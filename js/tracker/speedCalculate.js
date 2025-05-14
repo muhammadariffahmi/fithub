@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const distanceInput = document.getElementById("distanceInput");
             const speedText = document.getElementById("speedText");
 
+            // Calculate speed
             function calculateSpeed() {
                 const hours = parseInt(hoursInput.value) || 0;
                 const minutes = parseInt(minutesInput.value) || 0;
