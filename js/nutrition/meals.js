@@ -11,31 +11,31 @@ async function fetchMeals() {
 }
 
 const calorieMap = {
-    "Migas": 400,
-    "Sushi": 300,
-    "Burek": 450,
-    "Corba": 150,
-    "Kumpir": 500,
-    "Tamiya": 300, // Egyptian falafel
-    "Bistek": 480,
-    "Wontons": 350,
-    "Kafteji": 380,
-    "Big Mac": 550,
-    "Lasagne": 600,
-    "Timbits": 70, // per piece
-    "Dal fry": 280,
-    "Koshari": 450,
-    "Poutine": 740,
-    "Pancakes": 350,
-    "Kapsalon": 1000,
-    "Moussaka": 500,
-    "Shawarma": 600,
-    "Fish pie": 450,
-    "Stamppot": 400,
-    "Flamiche": 420,
-    "Kedgeree": 460,
-    "Ribollita": 300,
-    "Roti john": 500
+    "Migas": 3200,
+    "Sushi": 800,
+    "Burek": 1100,
+    "Corba": 350,
+    "Kumpir": 850,
+    "Tamiya": 1000,
+    "Bistek": 900,
+    "Wontons": 1400,
+    "Kafteji": 2200,
+    "Big Mac": 1200,
+    "Lasagne": 2500,
+    "Timbits": 1500, // per piece
+    "Dal fry": 500,
+    "Koshari": 1200,
+    "Poutine": 1500,
+    "Pancakes": 600,
+    "Kapsalon": 1800,
+    "Moussaka": 1500,
+    "Shawarma": 2200,
+    "Fish pie": 2000,
+    "Stamppot": 2500,
+    "Flamiche": 2000,
+    "Kedgeree": 1400,
+    "Ribollita": 900,
+    "Roti john": 1200
 };
 
 
