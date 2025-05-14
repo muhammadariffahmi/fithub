@@ -7,7 +7,6 @@
   <link href="/css/main.min.css" rel="stylesheet">
 </head>
 
-
 <body
   style="background-image: url('/images/dumbbell-red.png'); min-height: 100vh;   background-size: cover; background-repeat: no-repeat; background-position: center;">
 
@@ -23,6 +22,7 @@
 
       <h2>Account Information</h2>
 
+      <!-- Form -->
       <form id="profile">
 
         <!-- Name -->
@@ -87,32 +87,43 @@
       </form>
     </div>
 
+    <!-- Change password section -->
     <hr>
     <div class="bg-secondary p-5 container mt-3 w-50 rounded">
 
       <form>
+
         <h4>Change Password</h4>
+
+        <!-- Current password -->
         <div class="mb-3">
           <label for="currentPassword" class="form-label">Current Password</label>
           <input type="password" class="form-control" id="currentPassword">
         </div>
+
+        <!-- New password -->
         <div class="mb-3">
           <label for="newPassword" class="form-label">New Password</label>
           <input type="password" class="form-control" id="newPassword">
         </div>
+
+        <!-- Change password -->
         <button type="submit" class="btn btn-primary">Change Password</button>
       </form>
     </div>
     <hr>
+    <!-- Change password section END -->
 
+    <!-- Delete account button -->
     <div class=" container mt-2 w-50">
-
       <button class="btn btn-danger">Delete Account</button>
     </div>
+
   </div>
+
   <div class="text-center mt-5">
     <a href="/index.html" class="btn btn-primary rounded-pill px-4 mb-5">Back to Home Page</a>
-    <script src="/js/profile.js"></script>
+    <script src="../../js/Profile/profile.js"></script>
 
 </body>
 
