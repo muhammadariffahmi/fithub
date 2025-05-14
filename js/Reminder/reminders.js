@@ -121,9 +121,9 @@ setInterval(() => {
             const reminderTime = new Date(reminder.time).getTime();
 
             if (now >= reminderTime) {
-                // Notify with "Great job" message and play sound
+                // Notify
                 document.getElementById('reminder-sound').play();
-                showNotification(`🎉 Great job! You've completed your ${reminder.text}`);
+                showNotification(`Hey, its time to ${reminder.text}`);
 
                 reminder.shown = true;  // Mark as shown
                 saveReminders();
@@ -135,9 +135,9 @@ setInterval(() => {
             const reminderTime = new Date(reminder.time).getTime();
 
             if (now >= reminderTime) {
-                // Notify with "Great job" message and play sound
+                // Notify
                 document.getElementById('reminder-sound').play();
-                showNotification(`🎉 Great job! You've completed your ${reminder.text}`);
+                showNotification(`Hey, its time to ${reminder.text}`);
 
                 reminder.shown = true;  // Mark as shown
                 saveReminders();
