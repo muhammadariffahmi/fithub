@@ -50,16 +50,16 @@ document.querySelector("form").addEventListener("submit", function (e) {
 
             // Overlay text
             ctx.fillStyle = "white";
-            ctx.font = "bold 40px sans-serif";
-            ctx.fillText(title, 30, 50);
-            ctx.font = "30px sans-serif";
-            ctx.fillText(datetime, 30, 100);
+            ctx.font = "bold 70px sans-serif";
+            ctx.fillText(title, 70, 120);
+            ctx.font = "60px sans-serif";
+            ctx.fillText(datetime, 70, 220);
 
             // Add FitHub logo at bottom center
             const logo = new Image();
             logo.src = "/images/logo-long-white.png"; // Path to your logo
             logo.onload = function () {
-                const desiredWidth = 170; // Adjust this size as needed
+                const desiredWidth = 450; // Adjust this size as needed
                 const aspectRatio = logo.height / logo.width;
                 const logoWidth = desiredWidth;
                 const logoHeight = desiredWidth * aspectRatio;
