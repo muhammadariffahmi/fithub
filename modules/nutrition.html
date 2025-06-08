@@ -4,56 +4,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FitHub</title>
+  <title>FitHub | Nutrition Planner</title>
   <link rel="icon" type="image/png" href="/images/logo-round.png" />
   <link href="/css/main.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Favicon-->
+  <link rel="icon" type="image/x-icon" href="assets/img/logo-round.png" />
+  <!-- Font Awesome icons (free version)-->
+  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 </head>
 
-<body class="bg-primary">
+<body>
 
-  <!-- Tagline -->
-  <div class="container-fluid bg-primary py-2 d-flex justify-content-center align-items-center text-center">
-    <p class="text-light mb-0 fw-bold">WHERE GOALS BECOME GAINS</p>
-  </div>
-
-  <!-- Logo -->
-  <div class="container-fluid bg-secondary d-flex justify-content-center align-items-center pt-4 pb-2">
-    <a href="../index.html" class="d-block" style="text-align: center;">
-      <img src="/images/logo-long.png" alt="FitHub logo" class="img-fluid w-25">
-    </a>
-  </div>
-
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg bg-secondary">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="../index.html"><img src="/images/logo-long-sec.png" alt="..." /></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars ms-1"></i>
       </button>
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link mx-3 fw-bold" href="/index.html">HOME</a>
-          <a class="nav-link mx-3 fw-bold" href="/modules/tracker.html">FITNESS TRACKER</a>
-          <a class="nav-link mx-3 fw-bold" href="/modules/progress.html">PROGRESS CHARTS</a>
-          <a class="nav-link mx-3 fw-bold text-primary active" aria-current="page"
-            href="/modules/nutrition.html">NUTRITION PLANNER</a>
-          <a class="nav-link mx-3 fw-bold" href="/modules/reminders.html">NOTIFICATIONS & REMINDERS</a>
-          <a class="nav-link mx-3 fw-bold" href="/modules/Profile/profile.html">MANAGE PROFILE</a>
-        </div>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+          <li class="nav-item"><a class="nav-link" href="/modules/tracker.html">Tracker</a></li>
+          <li class="nav-item"><a class="nav-link" href="/modules/progress.html">Progress</a></li>
+          <li class="nav-item"><a class="nav-link" href="/modules/nutrition.html">Nutrition</a></li>
+          <li class="nav-item"><a class="nav-link" href="/modules/reminders.html">Reminders</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="/modules/Profile/login.html">Login</a></li>
+        </ul>
       </div>
     </div>
   </nav>
 
-  <div class="container mt-5">
+  <div class="px-5 pt-5 "
+    style="background-image: url('../images/header-bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="row">
 
       <!-- Calorie calculator -->
-      <div class="col-md-6 bg-light px-5 pb-3 pt-4 rounded">
+      <div class="col-md-6 bg-light px-5 pb-3 pt-4 mt-5 rounded">
 
         <div class="d-flex justify-content-between">
           <h2 class="text-dark">Calorie Calculator</h2>
-          <a href="#" data-bs-toggle="modal" data-bs-target="#bmrModal"><i class="bi bi-info-circle-fill fs-4 text-dark"></i></a>
+          <a href="#" data-bs-toggle="modal" data-bs-target="#bmrModal"><i
+              class="bi bi-info-circle-fill fs-4 text-dark"></i></a>
         </div>
 
         <!-- Form -->
@@ -164,7 +163,9 @@
       crossorigin="anonymous"></script>
     <script src="/js/nutrition/calorieNeeded.js"></script>
     <script src="/js/nutrition/meals.js"></script>
+    <script src="/js/scripts.js"></script>
 
+  </div>
 
 </body>
 

@@ -89,7 +89,7 @@ document.getElementById("sets").addEventListener("change", function () {
     for (let i = 1; i <= sets; i++) {
         const label = document.createElement("label");
         label.textContent = `Reps for Set ${i}`;
-        label.classList.add("form-label", "text-secondary");
+        label.classList.add("form-label", "text-primary");
 
         const input = document.createElement("input");
         input.type = "number";

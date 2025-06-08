@@ -4,263 +4,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FitHub</title>
+    <title>FitHub | Fitness Tracker</title>
     <link rel="icon" type="image/png" href="/images/logo-round.png" />
     <link href="/css/main.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/img/logo-round.png" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 
-    <!-- Tagline -->
-    <div class="container-fluid bg-primary py-2 d-flex justify-content-center align-items-center text-center">
-        <p class="text-light mb-0 fw-bold">WHERE GOALS BECOME GAINS</p>
-    </div>
-
-    <!-- FitHub logo -->
-    <div class="container-fluid bg-secondary d-flex justify-content-center align-items-center pt-4 pb-2">
-        <a href="../index.html" class="d-block" style="text-align: center;">
-            <img src="/images/logo-long.png" alt="FitHub logo" class="img-fluid w-25">
-        </a>
-    </div>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-secondary">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html"><img src="/images/logo-long-sec.png" alt="..." /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
             </button>
-            <div class="collapse navbar-collapse  justify-content-center" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link mx-3 fw-bold" href="/index.html">HOME</a>
-                    <a class="nav-link mx-3 fw-bold text-primary active" aria-current="page"
-                        href="/modules/tracker.html">FITNESS TRACKER</a>
-                    <a class="nav-link mx-3 fw-bold" href="/modules/progress.html">PROGRESS CHARTS</a>
-                    <a class="nav-link mx-3 fw-bold" href="/modules/nutrition.html">NUTRITION PLANNER</a>
-                    <a class="nav-link mx-3 fw-bold" href="/modules/reminders.html"> NOTIFICATIONS & REMINDERS</a>
-                    <a class="nav-link mx-3 fw-bold" href="/modules/Profile/profile.html">MANAGE PROFILE</a>
-
-                </div>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/modules/tracker.html">Tracker</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/modules/progress.html">Progress</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/modules/nutrition.html">Nutrition</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/modules/reminders.html">Reminders</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="/modules/Profile/login.html">Login</a></li>
+                </ul>
             </div>
         </div>
     </nav>
 
-    <main class="bg-primary pb-4">
+
+    <main class="pb-4 pt-5"
+        style="background-image: url('../images/header-bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
 
         <!-- Fitness Tracker title -->
-        <div class="container">
+        <div class="container pt-5">
             <h2 class="container-sm py-4 text-light">Track the Grind, Celebrate the Wins!</h2>
         </div>
 
-        <form id="activityForm">
-            <div class="container-sm">
+        <div class="container">
+            <div class="row">
+                <!-- Left Column: 8/12 -->
+                <div class="col-lg-8 pe-lg-3">
+                    <div class="bg-light rounded-3 me-lg-3">
 
-                <!-- Activity Title -->
-                <div class="container">
-                    <label for="titleActivity" class="form-label text-secondary">Title your activity</label>
-                    <input type="text" class="form-control" id="titleActivity"
-                        placeholder="e.g., Morning Run with Friends">
-                </div>
 
-                <!-- What activity -->
-                <div class="container mt-4">
-                    <label for="activityType" class="form-label text-secondary">What activity did you do?</label>
-                    <select class="form-select" aria-label="Choose your activity" id="activityType">
-                        <optgroup label="Cardio Exercises">
-                            <option selected value="1">Running</option>
-                            <option value="2">Walking</option>
-                            <option value="3">Hiking</option>
-                            <option value="4">Swimming</option>
-                            <option value="5">Cycling</option>
-                        </optgroup>
+                        <form id="activityForm">
+                            <div class="container-sm">
 
-                        <optgroup label="Strength Training">
-                            <option value="6">Weightlifting</option>
-                            <option value="7">Deadlifts</option>
-                            <option value="8">Kettlebell Swings</option>
-                            <option value="9">Bicep Curls</option>
-                            <option value="10">Tricep Dips</option>
-                        </optgroup>
+                                <!-- Activity Title -->
+                                <div class="container">
+                                    <label for="titleActivity" class="form-label text-primary mt-4 fw-semibold">Title
+                                        your
+                                        activity</label>
+                                    <input type="text" class="form-control" id="titleActivity"
+                                        placeholder="e.g., Morning Run with Friends">
+                                </div>
 
-                        <optgroup label="Bodyweight Exercises">
-                            <option value="11">Push-ups</option>
-                            <option value="12">Pull-ups</option>
-                            <option value="13">Squats</option>
-                            <option value="14">Lunges</option>
-                            <option value="15">Planks</option>
-                            <option value="16">Sit-ups</option>
-                            <option value="17">Mountain Climbers</option>
-                            <option value="18">Burpees</option>
-                            <option value="19">Leg Raises</option>
-                            <option value="20">Glute Bridges</option>
-                        </optgroup>
+                                <!-- What activity -->
+                                <div class="container mt-4">
+                                    <label for="activityType" class="form-label text-primary fw-semibold">What activity
+                                        did you
+                                        do?</label>
+                                    <select class="form-select" aria-label="Choose your activity" id="activityType">
+                                        <optgroup label="Cardio Exercises">
+                                            <option selected value="1">Running</option>
+                                            <option value="2">Walking</option>
+                                            <option value="3">Hiking</option>
+                                            <option value="4">Swimming</option>
+                                            <option value="5">Cycling</option>
+                                        </optgroup>
 
-                        <option value="other">Other</option>
-                    </select>
-                </div>
+                                        <optgroup label="Strength Training">
+                                            <option value="6">Weightlifting</option>
+                                            <option value="7">Deadlifts</option>
+                                            <option value="8">Kettlebell Swings</option>
+                                            <option value="9">Bicep Curls</option>
+                                            <option value="10">Tricep Dips</option>
+                                        </optgroup>
 
-                <!-- HIDE, for "other" choice -->
-                <div class="container mt-4" id="otherActivityContainer" style="display: none;">
-                    <label for="otherActivity" class="form-label text-secondary">Please specify your activity</label>
-                    <input type="text" class="form-control" id="otherActivity"
-                        placeholder="e.g. Skateboarding, Martial Arts">
-                </div>
+                                        <optgroup label="Bodyweight Exercises">
+                                            <option value="11">Push-ups</option>
+                                            <option value="12">Pull-ups</option>
+                                            <option value="13">Squats</option>
+                                            <option value="14">Lunges</option>
+                                            <option value="15">Planks</option>
+                                            <option value="16">Sit-ups</option>
+                                            <option value="17">Mountain Climbers</option>
+                                            <option value="18">Burpees</option>
+                                            <option value="19">Leg Raises</option>
+                                            <option value="20">Glute Bridges</option>
+                                        </optgroup>
 
-                <!-- Upload photo -->
-                <div class="container mt-4">
-                    <label for="activityImage" class="form-label text-secondary">Upload a photo</label>
-                    <input class="form-control" type="file" id="activityImage" accept="image/*">
-                </div>
-                <div id="imagePreview" class="container mt-3"></div>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
 
-                <!-- Date and time -->
-                <div class="container mt-4">
-                    <label for="datetime" class="text-secondary me-2">Date and time</label>
-                    <input type="datetime-local" id="datetime" name="datetime">
-                </div>
+                                <!-- HIDE, for "other" choice -->
+                                <div class="container mt-4" id="otherActivityContainer" style="display: none;">
+                                    <label for="otherActivity" class="form-label text-primary">Please specify your
+                                        activity</label>
+                                    <input type="text" class="form-control" id="otherActivity"
+                                        placeholder="e.g. Skateboarding, Martial Arts">
+                                </div>
 
-                <!-- The parameter -->
-                <div class="d-flex mt-4">
 
-                    <!-- Duration -->
-                    <div class="container" id="durationContainer">
-                        <label for="duration" class="form-label text-secondary">Duration</label>
-                        <div class="input-group">
-                            <input type="number" id="hours" class="form-control" placeholder="Hours" min="0">
-                            <span class="input-group-text bg-secondary">hr</span>
-                            <input type="number" id="minutes" class="form-control" placeholder="Minutes" min="0"
-                                max="59">
-                            <span class="input-group-text bg-secondary">min</span>
-                            <input type="number" id="seconds" class="form-control" placeholder="Seconds" min="0"
-                                max="59">
-                            <span class="input-group-text bg-secondary">sec</span>
+                                <div class="d-flex mt-4">
+
+                                    <!-- Upload photo -->
+                                    <div class="container ">
+                                        <label for="activityImage" class="form-label text-primary fw-semibold">Upload a
+                                            photo</label>
+                                        <input class="form-control" type="file" id="activityImage" accept="image/*">
+                                    </div>
+
+                                    <!-- Date and time -->
+                                    <div class="container ">
+                                        <label for="datetime" class="form-label text-primary fw-semibold">Date &
+                                            Time</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text text-dark"><i
+                                                    class="bi bi-calendar-event"></i></span>
+                                            <input type="datetime-local" class="form-control " id="datetime"
+                                                name="datetime">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="imagePreview" class="container mt-3"></div>
+
+
+                                <!-- Duration -->
+                                <div class="container mt-4" id="durationContainer">
+                                    <label for="duration" class="form-label text-primary fw-semibold">Duration</label>
+                                    <div class="input-group">
+                                        <input type="number" id="hours" class="form-control" placeholder="Hours"
+                                            min="0">
+                                        <span class="input-group-text">hr</span>
+                                        <input type="number" id="minutes" class="form-control" placeholder="Minutes"
+                                            min="0" max="59">
+                                        <span class="input-group-text ">min</span>
+                                        <input type="number" id="seconds" class="form-control" placeholder="Seconds"
+                                            min="0" max="59">
+                                        <span class="input-group-text ">sec</span>
+                                    </div>
+                                </div>
+
+                                <!-- The parameter -->
+                                <div class="d-flex mt-4">
+
+
+
+                                    <!-- Distance -->
+                                    <div class="container" id="distanceContainer">
+                                        <label for="distance"
+                                            class="form-label text-primary fw-semibold">Distance</label>
+                                        <div class="input-group">
+                                            <input type="number" id="distanceInput" class="form-control"
+                                                placeholder="Kilometer" min="0">
+                                            <span class="input-group-text ">km</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Speed -->
+                                    <div id="speedContainer" class="container">
+                                        <label for="speedText" class="form-label text-primary ">Speed</label>
+                                        <span id="speedText" class="form-control" readonly>0 km/h</span>
+                                    </div>
+
+                                    <!-- Weight used -->
+                                    <div class="container" id="weightUsed" style="display: none;">
+                                        <label for="weight" class="form-label text-primary fw-semibold">Weight
+                                            used</label>
+                                        <div class="d-flex">
+                                            <input type="number" class="form-control" id="weight"
+                                                placeholder="Enter weight">
+                                            <select class="form-select" id="weightUnit" aria-label="Select weight unit"
+                                                style="width: auto;">
+                                                <option value="kg" selected>kg</option>
+                                                <option value="lbs">lbs</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END parameter -->
+
+                                <!-- Steps -->
+                                <div class="container mt-4" id="stepsContainer" style="display: none;">
+                                    <label for="steps" class="form-label text-primary fw-semibold">Steps</label>
+                                    <input type="number" class="form-control" id="steps"
+                                        placeholder="Enter your total steps">
+                                </div>
+
+                                <!-- Sets and reps -->
+                                <div id="setsContainer" style="display: none;">
+
+                                    <!-- Sets -->
+                                    <div class="container mt-4">
+                                        <label for="sets" class="form-label text-primary fw-semibold">Number of
+                                            Sets</label>
+                                        <input type="number" class="form-control" id="sets" placeholder="e.g., 3"
+                                            min="1">
+                                    </div>
+
+                                    <!-- Reps -->
+                                    <div id="repsSection">
+                                        <div class="container mt-3">
+                                            <label for="repsSet1" class="form-label text-primary">Reps for Set
+                                                1</label>
+                                            <input type="number" class="form-control" id="repsSet1"
+                                                placeholder="e.g., 12" min="1">
+                                        </div>
+                                        <!-- Additional sets will appear dynamically -->
+                                    </div>
+
+                                    <!-- Add set button -->
+                                    <div class="container mt-4">
+                                        <button type="button" class="btn btn-primary" id="addSetBtn">Add Another
+                                            Set</button>
+                                    </div>
+                                </div>
+                                <!-- END Sets and reps -->
+
+                                <!-- Rate session -->
+                                <div class="container mt-4 mx-0">
+                                    <label for="rate" class="form-label text-primary fw-semibold">Rate your
+                                        session</label>
+                                    <input type="range" class="form-range" id="rate">
+                                    <div class="d-flex justify-content-between px-2 text-dark">
+                                        <small>💀 I'm dead</small>
+                                        <small>😩 Meh</small>
+                                        <small>😌 Not bad</small>
+                                        <small>🔥 Great</small>
+                                        <small>😎 Crushed it</small>
+                                    </div>
+                                </div>
+
+                                <!-- Notes -->
+                                <div class="container mt-3">
+                                    <label for="notes" class="form-label text-primary fw-semibold">Leave some notes
+                                        about your
+                                        session</label>
+                                    <textarea class="form-control" id="notes" name="notes" rows="4"
+                                        placeholder="What did you do? How did you feel? Any goals for next time?"></textarea>
+                                </div>
+
+                                <div class="d-flex mt-4 align-items-center">
+                                    <!-- Left side: Calories and link -->
+                                    <div>
+                                        <div class="container">
+
+                                            <div class="d-flex ">
+
+                                                <!-- Calorie result -->
+                                                <div id="caloriesResult"
+                                                    class="text-light bg-primary px-4 py-2 me-4 "
+                                                    style="display: none;"></div>
+
+                                                <!-- How we calculate -->
+                                                <div>
+                                                    <a href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#calorieBurntModal" id="howCalculateBurnt"
+                                                        style="display: none;"><i
+                                                            class="bi bi-info-circle-fill fs-5 text-dark "></i></a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <!-- Right side: Submit button -->
+                                    <div class="ms-auto mb-4 mt-3">
+                                        <div class="container">
+                                            <input class="btn btn-secondary px-4 border border-primary fw-bold"
+                                                type="submit" value="SUBMIT">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </form>
+                        <!-- END Form -->
+
+
+
+                        <!-- Edited image display -->
+                        <div class="container">
+                            <canvas id="resultCanvas" style="display: none;"></canvas>
+                            <div class="container mt-3" id="finalImageContainer"></div>
+                        </div>
+
+                        <!-- Download button -->
+                        <div class="container pb-4">
+                            <div class="container mt-1" id="actionButtons" style="display: none;">
+                                <button class="btn btn-dark me-2" id="downloadBtn">Download Image</button>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Distance -->
-                    <div class="container" id="distanceContainer">
-                        <label for="distance" class="form-label text-secondary">Distance</label>
-                        <div class="input-group">
-                            <input type="number" id="distanceInput" class="form-control" placeholder="Kilometer"
-                                min="0">
-                            <span class="input-group-text bg-secondary">km</span>
-                        </div>
-                    </div>
-
-                    <!-- Speed -->
-                    <div id="speedContainer" class="container">
-                        <label for="speedText" class="form-label text-secondary">Speed</label>
-                        <span id="speedText" class="form-control" readonly>0 km/h</span>
-                    </div>
-
-                    <!-- Weight used -->
-                    <div class="container" id="weightUsed" style="display: none;">
-                        <label for="weight" class="form-label text-secondary">Weight used</label>
-                        <div class="d-flex">
-                            <input type="number" class="form-control" id="weight" placeholder="Enter weight">
-                            <select class="form-select bg-secondary" id="weightUnit" aria-label="Select weight unit"
-                                style="width: auto;">
-                                <option value="kg" selected>kg</option>
-                                <option value="lbs">lbs</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <!-- END parameter -->
-
-                <!-- Steps -->
-                <div class="container mt-4" id="stepsContainer" style="display: none;">
-                    <label for="steps" class="form-label text-secondary">Steps</label>
-                    <input type="number" class="form-control" id="steps" placeholder="Enter your total steps">
                 </div>
 
-                <!-- Sets and reps -->
-                <div id="setsContainer" style="display: none;">
 
-                    <!-- Sets -->
-                    <div class="container mt-4">
-                        <label for="sets" class="form-label text-secondary">Number of Sets</label>
-                        <input type="number" class="form-control" id="sets" placeholder="e.g., 3" min="1">
-                    </div>
 
-                    <!-- Reps -->
-                    <div id="repsSection">
-                        <div class="container mt-3">
-                            <label for="repsSet1" class="form-label text-secondary">Reps for Set 1</label>
-                            <input type="number" class="form-control" id="repsSet1" placeholder="e.g., 12" min="1">
-                        </div>
-                        <!-- Additional sets will appear dynamically -->
-                    </div>
-
-                    <!-- Add set button -->
-                    <div class="container mt-4">
-                        <button type="button" class="btn btn-secondary" id="addSetBtn">Add Another Set</button>
-                    </div>
-                </div>
-                <!-- END Sets and reps -->
-
-                <!-- Rate session -->
-                <div class="container mt-4 mx-0">
-                    <label for="rate" class="form-label text-secondary">Rate your session</label>
-                    <input type="range" class="form-range" id="rate">
-                    <div class="d-flex justify-content-between px-2 text-light">
-                        <small>💀 I'm dead</small>
-                        <small>😩 Meh</small>
-                        <small>😌 Not bad</small>
-                        <small>🔥 Great</small>
-                        <small>😎 Crushed it</small>
+                <!-- Right Column: 4/12 -->
+                <div class="col-lg-4 bg-light rounded-3">
+                    <div class="mt-4">
+                        <h5 class="text-dark ms-2 mb-2">Your Logged Activities</h5>
+                        <hr class="mt-2 mb-3 mx-2 border-primary border-4">
+                        <div id="activityList" class="text-primary"></div>
                     </div>
                 </div>
 
-                <!-- Notes -->
-                <div class="container mt-3">
-                    <label for="notes" class="form-label text-secondary">Leave some notes about your session</label>
-                    <textarea class="form-control" id="notes" name="notes" rows="4"
-                        placeholder="What did you do? How did you feel? Any goals for next time?"></textarea>
-                </div>
-
-                <!-- Submit button -->
-                <div class="container d-flex mt-4 justify-content-end">
-                    <input class="btn btn-secondary" type="submit" value="Submit">
-                </div>
-            </div>
-        </form>
-        <!-- END Form -->
-
-        <!-- Calorie result -->
-        <div class="container">
-            <div class="container">
-                <div id="caloriesResult" class="mt-3 text-secondary fw-bold" style="display:none;"></div>
-            </div>
-        </div>
-
-        <!-- How we calculate -->
-        <div class="container">
-            <div class="container">
-                <p><a class="text-light" id="howCalculateBurnt" href="#" data-bs-toggle="modal"
-                        data-bs-target="#calorieBurntModal" style="display:none;">How we calculate it?</a></p>
-            </div>
-        </div>
-
-        <!-- Edited image display -->
-        <div class="container">
-            <canvas id="resultCanvas" style="display: none;"></canvas>
-            <div class="container mt-3" id="finalImageContainer"></div>
-        </div>
-
-        <!-- Download button -->
-        <div class="container">
-            <div class="container mt-3" id="actionButtons" style="display: none;">
-                <button class="btn btn-dark me-2" id="downloadBtn">Download Image</button>
-            </div>
-        </div>
-
-        <!-- Display submitted activities -->
-        <div class="container">
-            <div class="container mt-5">
-                <h3 class="text-light">Your Logged Activities</h3>
-                <div id="activityList" class="text-primary"></div>
             </div>
         </div>
 
@@ -272,7 +334,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content bg-light text-dark">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="calorieBurntModalLabel">How We Estimate Calories Burned</h5>
+                    <h5 class="modal-title text-dark" id="calorieBurntModalLabel">How We Estimate Calories Burned</h5>
                     <button type="button" class="btn-close bg-light" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                 </div>
@@ -318,6 +380,8 @@
     <script src="/js/tracker/speedCalculate.js"></script>
     <script src="/js/tracker/calorieCalculate.js"></script>
     <script src="/js/tracker/imageEditDisplay.js"></script>
+    <script src="/js/scripts.js"></script>
+
 
 
 </body>

@@ -2,54 +2,51 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Progress Charts | FitHub</title>
-    <link rel="icon" type="image/png" href="../images/logo-round.png" />
-    <link href="/css/main.min.css" rel="stylesheet" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitHub | Fitness Tracker</title>
+    <link rel="icon" type="image/png" href="/images/logo-round.png" />
+    <link href="/css/main.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/img/logo-round.png" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
 
-    <!-- Top slogan -->
-    <div class="container-fluid bg-primary py-2 d-flex justify-content-center align-items-center text-center">
-        <p class="text-light mb-0 fw-bold">WHERE GOALS BECOME GAINS</p>
-    </div>
-
-    <!-- Logo banner -->
-    <div class="container-fluid bg-secondary d-flex justify-content-center align-items-center pt-4 pb-2">
-        <a href="../index.html" class="d-block" style="text-align: center;">
-            <img src="/images/logo-long.png" alt="FitHub logo" class="img-fluid w-25">
-        </a>
-    </div>
-
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg bg-secondary">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html"><img src="/images/logo-long-sec.png" alt="..." /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars ms-1"></i>
             </button>
-            <div class="collapse navbar-collapse  justify-content-center" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-link mx-3 fw-bold" href="/index.html">HOME</a>
-                    <a class="nav-link mx-3 fw-bold" href="/modules/tracker.html">FITNESS TRACKER</a>
-                    <a class="nav-link mx-3 fw-bold text-primary active" aria-current="page"
-                        href="/modules/progress.html">PROGRESS CHARTS</a>
-                    <a class="nav-link mx-3 fw-bold" href="/modules/nutrition.html">NUTRITION PLANNER</a>
-                    <a class="nav-link mx-3 fw-bold" href="/modules/reminders.html"> NOTIFICATIONS & REMINDERS</a>
-                    <a class="nav-link mx-3 fw-bold" href="/modules/Profile/profile.html">MANAGE PROFILE</a>
-
-                </div>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/modules/tracker.html">Tracker</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/modules/progress.html">Progress</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/modules/nutrition.html">Nutrition</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/modules/reminders.html">Reminders</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="/modules/Profile/login.html">Login</a></li>
+                </ul>
             </div>
         </div>
     </nav>
 
     <!-- main content -->
-    <main class="bg-primary pb-4">
-        <div class="container">
-            <h2 class="container-sm py-4 text-light">Your Fitness Progress</h2>
+    <main class="bg-primary pb-4 pt-5"
+        style="background-image: url('../images/header-bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+        <div class="container pt-5">
+            <h2 class="container-sm py-4 text-light ">Your Fitness Progress</h2>
 
             <!-- chart 1: cardio activity -->
             <div class="chart-container bg-light p-4 rounded shadow-sm">
@@ -91,6 +88,8 @@
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
     <script src="/js/Progress/progressCharts.js"></script>
+    <script src="/js/scripts.js"></script>
+
 
 </body>
 
