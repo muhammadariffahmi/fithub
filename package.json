@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,11 @@
   "homepage": "https://github.com/muhammadariffahmi/fithub#readme",
   "description": "",
   "dependencies": {
-    "bootstrap": "^5.3.5"
+    "bootstrap": "^5.3.5",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^8.15.1",
+    "nodemon": "^3.1.10"
   }
 }
