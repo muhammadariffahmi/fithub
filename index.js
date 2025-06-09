@@ -60,6 +60,25 @@ app.get('/', (req, res) => {
     res.render('index')
 })
 
+app.get('/tracker', (req, res) => {
+  res.render('tracker'); 
+});
+
+app.get('/progress', (req, res) => {
+  res.render('progress'); 
+});
+
+app.get('/nutrition', (req, res) => {
+  res.render('nutrition'); 
+});
+
+app.get('/reminders', (req, res) => {
+  res.render('reminders'); 
+});
+
+app.get('/login', (req, res) => {
+  res.render('login'); 
+});
 
 
 //command to run the app with nodemon: npm run server
