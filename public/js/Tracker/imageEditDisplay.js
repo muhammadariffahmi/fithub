@@ -1,5 +1,5 @@
 document.querySelector("form").addEventListener("submit", function (e) {
-    e.preventDefault(); // Prevent form submission
+    // e.preventDefault(); // Prevent form submission
 
     const file = document.getElementById("activityImage").files[0];
     const title = document.getElementById("titleActivity").value || "My Workout";
@@ -121,6 +121,7 @@ document.querySelector("form").addEventListener("submit", function (e) {
     let activities = JSON.parse(localStorage.getItem('activities')) || [];
     activities.push(activity);
     localStorage.setItem('activities', JSON.stringify(activities));
+
 
     loadActivities();
     event.target.reset(); // clear form

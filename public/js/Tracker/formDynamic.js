@@ -97,6 +97,7 @@ document.getElementById("sets").addEventListener("change", function () {
         input.placeholder = `e.g., ${i * 10}`;
         input.min = "1";
         input.required = true;
+        input.name = `reps${i}`; 
 
         const container = document.createElement("div");
         container.classList.add("container", "mt-3");

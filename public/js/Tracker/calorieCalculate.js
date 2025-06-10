@@ -1,5 +1,5 @@
 document.querySelector("form").addEventListener("submit", function (e) {
-    e.preventDefault(); // prevent actual form submission
+    // e.preventDefault(); // prevent actual form submission
 
     const activityId = parseInt(document.getElementById("activityType").value, 10);
     const caloriesResult = document.getElementById("caloriesResult");

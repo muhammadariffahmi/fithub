@@ -44,115 +44,146 @@
     style="background-image: url('../images/header-bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <!-- Main Section -->
     <section id="reminders" class="container py-5">
-      <h2 class="mb-4 text-light">Add a Reminder</h2>
+      <div class="container">
+        <h2 class="mb-4 text-light">Add a Reminder</h2>
+      </div>
+      <div class="container">
+        <div class="row">
+          <!-- Left Column: 8/12 -->
+          <div class="col-lg-8 pe-lg-3">
+            <div class="bg-light rounded-3 me-lg-3">
 
-      <!-- Form -->
-      <form id="reminder-form" class="mb-4">
-        <div class="mb-3">
+              <!-- Form -->
+              <form id="reminder-form" class="px-4 py-3">
+                <div class="mb-3">
 
-          <!-- Reminder title -->
-          <label for="reminder-text" class="form-label text-secondary">What do you want to be reminded of?</label>
+                  <!-- Reminder title -->
+                  <label for="reminder-text" class="form-label text-primary fw-semibold">What do you want to be reminded
+                    of?</label>
 
-          <!-- Title form -->
-          <div class="d-flex">
-            <input type="text" id="reminder-text" class="form-control w-75" placeholder="e.g. 30 min Workout"
-              required />
-            <button id="voice-input" class="btn btn-secondary w-25 ms-2"><i class="bi bi-mic-fill me-2"></i>Voice
-              Input</button>
+                  <!-- Title form -->
+                  <div class="d-flex">
+                    <input type="text" id="reminder-text" class="form-control w-75" placeholder="e.g. 30 min Workout"
+                      required />
+                    <button id="voice-input" class="btn btn-secondary w-25 ms-2"><i
+                        class="bi bi-mic-fill me-2"></i>Voice
+                      Input</button>
+                  </div>
+                </div>
+
+                <!-- Category -->
+                <div class="mb-3">
+                  <label for="reminder-category" class="form-label text-primary fw-semibold">Category</label>
+                  <select id="reminder-category" class="form-select">
+                    <option value="hydration">Hydration</option>
+                    <option value="exercise">Exercise</option>
+                    <option value="meal">Meal</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <!-- Date and Time -->
+                <div class="mb-3">
+                  <label for="reminder-time" class="form-label text-primary fw-semibold>Set Date and Time:</label>
+                  <input type=" datetime-local" id="reminder-time" class="form-control" />
+                </div>
+
+                <!-- Recurring -->
+                <div class="mb-3">
+                  <label class="form-label text-primary fw-semibold">Recurring</label>
+                  <div class="text-light d-flex gap-4 mb-2">
+
+                    <!-- Radio button -->
+                    <div class="form-check">
+                      <input type="radio" id="daily" name="recurring" value="daily" class="form-check-input" checked />
+                      <label class="form-check-label text-dark" for="daily">Daily</label>
+                    </div>
+                    <div class="form-check">
+                      <input type="radio" id="recurring-custom" name="recurring" value="custom"
+                        class="form-check-input" />
+                      <label class="form-check-label text-dark" for="recurring-custom">Custom Days</label>
+                    </div>
+                  </div>
+
+                  <!-- Custom Weekday Checkboxes -->
+                  <div id="custom-days" class="d-flex flex-wrap gap-3 ps-3 text-dark" style="display: none;">
+                    <div class="form-check"><input type="checkbox" id="monday" value="Monday"
+                        class="form-check-input" />
+                      <label class="form-check-label" for="monday">Mon</label>
+                    </div>
+                    <div class="form-check"><input type="checkbox" id="tuesday" value="Tuesday"
+                        class="form-check-input" />
+                      <label class="form-check-label" for="tuesday">Tue</label>
+                    </div>
+                    <div class="form-check"><input type="checkbox" id="wednesday" value="Wednesday"
+                        class="form-check-input" />
+                      <label class="form-check-label" for="wednesday">Wed</label>
+                    </div>
+                    <div class="form-check"><input type="checkbox" id="thursday" value="Thursday"
+                        class="form-check-input" />
+                      <label class="form-check-label" for="thursday">Thu</label>
+                    </div>
+                    <div class="form-check"><input type="checkbox" id="friday" value="Friday"
+                        class="form-check-input" />
+                      <label class="form-check-label" for="friday">Fri</label>
+                    </div>
+                    <div class="form-check"><input type="checkbox" id="saturday" value="Saturday"
+                        class="form-check-input" />
+                      <label class="form-check-label" for="saturday">Sat</label>
+                    </div>
+                    <div class="form-check"><input type="checkbox" id="sunday" value="Sunday"
+                        class="form-check-input" />
+                      <label class="form-check-label" for="sunday">Sun</label>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Interval -->
+                <div class="mb-3">
+                  <label for="reminder-interval" class="form-label text-primary fw-semibold">Repeat Interval</label>
+                  <select id="reminder-interval" class="form-select">
+                    <option value="none">No Repeat</option>
+                    <option value="30">Every 30 minutes</option>
+                    <option value="45">Every 45 minutes</option>
+                    <option value="60">Every 1 hour</option>
+                  </select>
+                </div>
+
+                <!-- Duration -->
+                <div class="mb-3">
+                  <label for="reminder-duration" class="form-label text-primary fw-semibold">Activity Duration</label>
+                  <select id="reminder-duration" class="form-select">
+                    <option value="0">No duration</option>
+                    <option value="30">30 minutes</option>
+                    <option value="60">1 hour</option>
+                    <option value="90">1.5 hours</option>
+                    <option value="120">2 hours</option>
+                  </select>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-secondary mt-2 mb-4 fw-bold">ADD REMINDER</button>
+              </form>
+              <!-- Form END -->
+
+            </div>
+
           </div>
-        </div>
+          <!-- Right Column: 4/12 -->
+          <div class="col-lg-4 bg-light rounded-3">
+            <div class="mt-4">
 
-        <!-- Category -->
-        <div class="mb-3">
-          <label for="reminder-category" class="form-label text-secondary">Category</label>
-          <select id="reminder-category" class="form-select">
-            <option value="hydration">Hydration</option>
-            <option value="exercise">Exercise</option>
-            <option value="meal">Meal</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
+              <!-- Reminder list -->
+              <h5 class="text-dark ms-2 mb-2">Your Reminders</h5>
+              <hr class="mt-2 mb-3 mx-2 border-primary border-4">
+              <ul id="reminder-list" class="list-group"></ul>
 
-        <!-- Date and Time -->
-        <div class="mb-3">
-          <label for="reminder-time" class="form-label text-secondary">Set Date and Time:</label>
-          <input type="datetime-local" id="reminder-time" class="form-control" />
-        </div>
 
-        <!-- Recurring -->
-        <div class="mb-3">
-          <label class="form-label text-secondary">Recurring</label>
-          <div class="text-light d-flex gap-4 mb-2">
-
-            <!-- Radio button -->
-            <div class="form-check">
-              <input type="radio" id="daily" name="recurring" value="daily" class="form-check-input" checked />
-              <label class="form-check-label" for="daily">Daily</label>
-            </div>
-            <div class="form-check">
-              <input type="radio" id="recurring-custom" name="recurring" value="custom" class="form-check-input" />
-              <label class="form-check-label" for="recurring-custom">Custom Days</label>
             </div>
           </div>
 
-          <!-- Custom Weekday Checkboxes -->
-          <div id="custom-days" class="d-flex flex-wrap gap-3 ps-3 text-light" style="display: none;">
-            <div class="form-check"><input type="checkbox" id="monday" value="Monday" class="form-check-input" />
-              <label class="form-check-label" for="monday">Mon</label>
-            </div>
-            <div class="form-check"><input type="checkbox" id="tuesday" value="Tuesday" class="form-check-input" />
-              <label class="form-check-label" for="tuesday">Tue</label>
-            </div>
-            <div class="form-check"><input type="checkbox" id="wednesday" value="Wednesday" class="form-check-input" />
-              <label class="form-check-label" for="wednesday">Wed</label>
-            </div>
-            <div class="form-check"><input type="checkbox" id="thursday" value="Thursday" class="form-check-input" />
-              <label class="form-check-label" for="thursday">Thu</label>
-            </div>
-            <div class="form-check"><input type="checkbox" id="friday" value="Friday" class="form-check-input" />
-              <label class="form-check-label" for="friday">Fri</label>
-            </div>
-            <div class="form-check"><input type="checkbox" id="saturday" value="Saturday" class="form-check-input" />
-              <label class="form-check-label" for="saturday">Sat</label>
-            </div>
-            <div class="form-check"><input type="checkbox" id="sunday" value="Sunday" class="form-check-input" />
-              <label class="form-check-label" for="sunday">Sun</label>
-            </div>
-          </div>
         </div>
-
-        <!-- Interval -->
-        <div class="mb-3">
-          <label for="reminder-interval" class="form-label text-secondary">Repeat Interval</label>
-          <select id="reminder-interval" class="form-select">
-            <option value="none">No Repeat</option>
-            <option value="30">Every 30 minutes</option>
-            <option value="45">Every 45 minutes</option>
-            <option value="60">Every 1 hour</option>
-          </select>
-        </div>
-
-        <!-- Duration -->
-        <div class="mb-3">
-          <label for="reminder-duration" class="form-label text-secondary">Activity Duration</label>
-          <select id="reminder-duration" class="form-select">
-            <option value="0">No duration</option>
-            <option value="30">30 minutes</option>
-            <option value="60">1 hour</option>
-            <option value="90">1.5 hours</option>
-            <option value="120">2 hours</option>
-          </select>
-        </div>
-
-        <!-- Submit button -->
-        <button type="submit" class="btn btn-secondary mt-2 mb-4">Add Reminder</button>
-      </form>
-      <!-- Form END -->
-
-      <!-- Reminder list -->
-      <h3 class="text-light">Upcoming Reminders</h3>
-      <ul id="reminder-list" class="list-group"></ul>
-
+      </div>
     </section>
   </div>
 

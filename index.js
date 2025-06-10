@@ -8,7 +8,7 @@ const path = require('path');  //include Path module to work with directories an
 const mongoose = require('mongoose');
 const methodOverride = require('method-override')
 
-const Product = require('./models/activity');   //import the model
+const Activity = require('./models/activity');   //import the model
 
 //Connect to MongoDB - connection without error handling
 //mongoose.connect("mongodb://localhost:27017/catApp");
@@ -60,9 +60,74 @@ app.get('/', (req, res) => {
     res.render('index')
 })
 
-app.get('/tracker', (req, res) => {
-  res.render('tracker'); 
+const activityTypeMap = {
+  1: "Running",
+  2: "Walking",
+  3: "Hiking",
+  4: "Swimming",
+  5: "Cycling",
+  6: "Weightlifting",
+  7: "Deadlifts",
+  8: "Kettlebell Swings",
+  9: "Bicep Curls",
+  10: "Tricep Dips",
+  11: "Push-ups",
+  12: "Pull-ups",
+  13: "Squats",
+  14: "Lunges",
+  15: "Planks",
+  16: "Sit-ups",
+  17: "Mountain Climbers",
+  18: "Burpees",
+  19: "Leg Raises",
+  20: "Glute Bridges",
+  other: "Other"
+};
+
+app.use('/tracker', (req, res, next) => {
+  if (req.method === 'POST') {
+    req.body.duration = {
+      hours: Number(req.body.hours) || 0,
+      minutes: Number(req.body.minutes) || 0,
+      seconds: Number(req.body.seconds) || 0
+    };
+
+    if (req.body.weight || req.body.weightUnit) {
+      req.body.weightUsed = {
+        weight: Number(req.body.weight),
+        unit: req.body.weightUnit
+      };
+    }
+
+    req.body.reps = Object.keys(req.body)
+      .filter(k => k.startsWith('reps'))
+      .map(k => Number(req.body[k]))
+      .filter(n => !isNaN(n));
+  }
+
+  next();
 });
+
+
+app.get('/tracker', async (req, res) => {
+  try {
+    let activities = await Activity.find({}).sort({ datetime: -1 });
+
+    // Convert activityType number to string
+    activities = activities.map(activity => {
+      const activityCopy = activity.toObject(); // Convert Mongoose doc to plain object
+      activityCopy.activityTypeLabel = activityTypeMap[activity.activityType] || "Unknown";
+      return activityCopy;
+    });
+
+    res.render('tracker', { activities });
+  } catch (err) {
+    console.error("Error loading activities:", err);
+    res.render('tracker', { activities: [] });
+  }
+});
+
+
 
 app.get('/progress', (req, res) => {
   res.render('progress'); 
@@ -91,6 +156,40 @@ app.get('/profile', (req, res) => {
 app.get('/register', (req, res) => {
   res.render('register'); 
 });
+
+app.post('/tracker', async (req, res) => {
+  console.log("POST /tracker hit"); // 🟡 Step 1: Make sure this shows
+
+  try {
+    console.log("Form data:", req.body); // 🟡 Step 2: Check form data
+
+    const newActivity = new Activity(req.body);
+    await newActivity.save();
+
+    console.log("Activity saved:", newActivity); // 🟢 Step 3: Confirm saved
+
+    // res.status(201).send('Activity saved successfully');
+    res.redirect('/tracker');
+
+
+  } catch (error) {
+    console.error("Error saving activity:", error); // 🔴 Step 4: Catch any errors
+    // res.status(500).send('Error saving activity');
+  }
+});
+
+app.delete('/activities/:id', async (req, res) => {
+  try {
+    await Activity.findByIdAndDelete(req.params.id);
+    res.redirect('/tracker'); // or send JSON if using AJAX
+  } catch (err) {
+    console.error('Error deleting activity:', err);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+
 
 
 

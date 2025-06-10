@@ -1,61 +1,41 @@
 const mongoose = require('mongoose');
 
-const activitySchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true
-    },
-    activityType: {
-        type: String,
-        required: true
-    },
-    otherActivity: {
-        type: String
-    },
-    imagePath: {
-        type: String
-    },
-    datetime: {
-        type: Date,
-        required: true
-    },
-    duration: {
-        hours: { type: Number, default: 0 },
-        minutes: { type: Number, default: 0 },
-        seconds: { type: Number, default: 0 }
-    },
-    distance: {
-        type: Number
-    },
-    speed: {
-        type: Number
-    },
-    weightUsed: {
-        value: { type: Number },
-        unit: { type: String, enum: ['kg', 'lbs'] }
-    },
-    steps: {
-        type: Number
-    },
-    sets: {
-        type: Number
-    },
-    reps: {
-        type: [Number] // Array of reps per set
-    },
-    rate: {
-        type: Number,
-        min: 0,
-        max: 100
-    },
-    notes: {
-        type: String
-    },
-    caloriesBurned: {
-        type: Number
-    }
-}, { timestamps: true });
+const ActivitySchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  activityType: { type: String, required: true }, // Store activity name or ID
 
-const Activity = mongoose.model('Activity', activitySchema);
+  otherActivityType: { type: String }, // Used only when "Other" is selected
 
-module.exports = Activity;
+  imageUrl: { type: String }, // Should be set when the image is uploaded to disk/cloud
+
+  datetime: { type: Date, required: true },
+
+  duration: {
+    hours: { type: Number, default: 0 },
+    minutes: { type: Number, default: 0 },
+    seconds: { type: Number, default: 0 }
+  },
+
+  distance: { type: Number }, // in km
+  speed: { type: Number }, // in km/h, optional if you want to store it
+
+  weightUsed: {
+    weight: { type: Number },
+    unit: { type: String, enum: ['kg', 'lbs'] }
+  },
+
+  steps: { type: Number },
+
+  sets: { type: Number },
+  reps: [{ type: Number }], // reps per set, can be an array
+
+  rate: { type: Number }, // from 0 to 100 (slider)
+
+  notes: { type: String },
+
+  caloriesBurned: { type: Number }, // calculated before saving
+
+  createdAt: { type: Date, default: Date.now }
+});
+
+module.exports = mongoose.model('Activity', ActivitySchema);
