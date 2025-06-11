@@ -166,11 +166,12 @@ app.get('/login', (req, res) => {
   res.render('login'); 
 });
 
-app.get('/dashboard', (req, res) => {
+app.get('/dashboard', async (req, res) => {
     if (!req.session.user_id) {
         return res.redirect('/');
     }
-    res.render('dashboard'); // or pass user data if needed
+    const user = await User.findById(req.session.user_id);
+    res.render('dashboard', { user }); // Pass user object to EJS
 });
 
 
