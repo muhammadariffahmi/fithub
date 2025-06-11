@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <title>User Profile - FitHub</title>
   <link href="/css/main.min.css" rel="stylesheet">
+  <link href="/css/app.css" rel="stylesheet">
+
 </head>
 
 <body
@@ -13,118 +15,123 @@
   <div class="container mt-5">
 
     <!-- Container background -->
-    <div class="bg-secondary p-5 container mt-5 w-50 rounded">
+    <div class="bg-light p-5 container mt-5 rounded">
 
       <!-- Logo -->
       <div style="text-align: center;">
-        <img src="/images/logo-long.png" alt="FitHub" style="max-height: 60px;" class="mb-4">
+        <a href="/dashboard">
+          <img src="/images/logo-long.png" alt="FitHub" style="max-height: 60px;" class="mb-4">
+        </a>
       </div>
 
-      <h2>Account Information</h2>
 
-      <!-- Form -->
+
       <form id="profile">
+        <div class="mt-2 row">
+          <!-- Left: Account Info -->
+          <div class="col-md-6 pe-md-3">
+            <h2>Account Information</h2>
 
-        <!-- Name -->
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" class="form-control" id="name" value="John Doe">
-        </div>
-
-        <!-- Email -->
-        <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" value="john@example.com">
-        </div>
-
-        <h2 class="mt-4">Fitness Profile</h2>
-
-        <!-- Age -->
-        <div class="mb-3">
-          <label for="age" class="form-label">Age</label>
-          <input type="number" class="form-control" id="age" value="22">
-        </div>
-
-        <!-- Weight -->
-        <div class="mb-3">
-          <label for="weight" class="form-label">Weight</label>
-          <div class="input-group">
-            <input type="number" class="form-control" id="weight" value="70">
-            <span class="input-group-text bg-light">kg</span>
-          </div>
-        </div>
-
-        <!-- Height -->
-        <div class="mb-3">
-          <label for="height" class="form-label">Height</label>
-          <div class="input-group">
-            <input type="number" class="form-control" id="height" value="175">
-            <span class="input-group-text bg-light">cm</span>
-          </div>
-        </div>
-
-        <!-- Gender -->
-        <div class="mb-3">
-          <label for="gender" class="form-label">Gender</label>
-          <div class="d-flex">
-            <div class="form-check me-3">
-              <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" checked>
-              <label class="form-check-label" for="genderMale">
-                Male
-              </label>
+            <!-- Name -->
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" value="John Doe">
             </div>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female">
-              <label class="form-check-label" for="genderFemale">
-                Female
-              </label>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" value="john@example.com">
+            </div>
+
+            <!-- Change Password -->
+            <div class="container bg-info rounded p-3 mt-4">
+              <h4>Change Password</h4>
+
+              <div class="mb-3">
+                <label for="currentPassword" class="form-label">Current Password</label>
+                <input type="password" class="form-control" id="currentPassword">
+              </div>
+
+              <div class="mb-3">
+                <label for="newPassword" class="form-label">New Password</label>
+                <input type="password" class="form-control" id="newPassword">
+              </div>
+
+              <button type="submit" class="btn btn-secondary fw-semibold">Change Password</button>
             </div>
           </div>
+
+
+          <!-- Right: Fitness Profile -->
+          <div class="col-md-6 ps-md-3">
+            <h2>Fitness Profile</h2>
+
+            <!-- Age -->
+            <div class="mb-3">
+              <label for="age" class="form-label">Age</label>
+              <input type="number" class="form-control" id="age" value="22">
+            </div>
+
+            <!-- Weight -->
+            <div class="mb-3">
+              <label for="weight" class="form-label">Weight</label>
+              <div class="input-group">
+                <input type="number" class="form-control" id="weight" value="70">
+                <span class="input-group-text bg-light">kg</span>
+              </div>
+            </div>
+
+            <!-- Height -->
+            <div class="mb-3">
+              <label for="height" class="form-label">Height</label>
+              <div class="input-group">
+                <input type="number" class="form-control" id="height" value="175">
+                <span class="input-group-text bg-light">cm</span>
+              </div>
+            </div>
+
+            <!-- Gender -->
+            <div class="mb-3">
+              <label for="gender" class="form-label">Gender</label>
+              <div class="d-flex">
+                <div class="form-check me-3">
+                  <input class="form-check-input" type="radio" name="gender" id="genderMale" value="male" checked>
+                  <label class="form-check-label" for="genderMale">Male</label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="gender" id="genderFemale" value="female">
+                  <label class="form-check-label" for="genderFemale">Female</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end gap-3">
+              <!-- Delete account button -->
+              <div class="  mt-3 ">
+                <button class="btn btn-danger">Delete Account</button>
+              </div>
+
+              <div class="text-end mt-3">
+                <button type="submit" class="btn btn-secondary fw-semibold">Update Profile</button>
+              </div>
+            </div>
+
+          </div>
         </div>
 
-        <!-- Submit button -->
-        <button type="submit" class="btn btn-primary">Update Profile</button>
+
       </form>
+
     </div>
 
-    <!-- Change password section -->
-    <hr>
-    <div class="bg-secondary p-5 container mt-3 w-50 rounded">
 
-      <form>
 
-        <h4>Change Password</h4>
 
-        <!-- Current password -->
-        <div class="mb-3">
-          <label for="currentPassword" class="form-label">Current Password</label>
-          <input type="password" class="form-control" id="currentPassword">
-        </div>
-
-        <!-- New password -->
-        <div class="mb-3">
-          <label for="newPassword" class="form-label">New Password</label>
-          <input type="password" class="form-control" id="newPassword">
-        </div>
-
-        <!-- Change password -->
-        <button type="submit" class="btn btn-primary">Change Password</button>
-      </form>
-    </div>
-    <hr>
-    <!-- Change password section END -->
-
-    <!-- Delete account button -->
-    <div class=" container mt-2 w-50">
-      <button class="btn btn-danger">Delete Account</button>
-    </div>
 
   </div>
 
-  <div class="text-center mt-5">
-    <a href="/dashboard" class="btn btn-primary rounded-pill px-4 mb-5">Back to Home Page</a>
-    <script src="/profile"></script>
-
+ 
 </body>
 
 </html>
