@@ -21,7 +21,12 @@ document.getElementById("okBtn").addEventListener("click", function () {
               hour12: false,
           }).replace(",", " |");
 
-    if (!file) return;
+    if (!file) {
+        // ✅ No image uploaded — just calculate calories and enable submit
+        calculateCalories();
+        document.getElementById("submitBtn").disabled = false;
+        return;
+    }
 
     const reader = new FileReader();
 
@@ -90,6 +95,7 @@ document.getElementById("okBtn").addEventListener("click", function () {
     reader.readAsDataURL(file);
 });
 
+
 function calculateCalories() {
     const activityId = parseInt(document.getElementById("activityType").value, 10);
     const caloriesResult = document.getElementById("caloriesResult");
@@ -123,3 +129,23 @@ function getDurationInMinutes() {
     const sec = parseInt(document.getElementById("seconds").value) || 0;
     return hr * 60 + min + sec / 60;
 }
+
+document.getElementById("activityForm").addEventListener("submit", function () {
+    const hours = parseInt(document.getElementById("hours").value) || 0;
+    const minutes = parseInt(document.getElementById("minutes").value) || 0;
+    const seconds = parseInt(document.getElementById("seconds").value) || 0;
+    const distance = parseFloat(document.getElementById("distanceInput").value) || 0;
+
+    const totalHours = hours + (minutes / 60) + (seconds / 3600);
+    let speed = 0;
+    if (distance > 0 && totalHours > 0) {
+        speed = distance / totalHours;
+    }
+
+    // Create hidden input to send speed to backend
+    const speedInput = document.createElement("input");
+    speedInput.type = "hidden";
+    speedInput.name = "speed";
+    speedInput.value = speed.toFixed(2);
+    this.appendChild(speedInput);
+});

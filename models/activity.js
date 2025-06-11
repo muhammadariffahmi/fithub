@@ -17,7 +17,7 @@ const ActivitySchema = new mongoose.Schema({
   },
 
   distance: { type: Number }, // in km
-  speed: { type: Number }, // in km/h, optional if you want to store it
+  speed: { type: Number }, // in km/h, 
 
   weightUsed: {
     weight: { type: Number },
