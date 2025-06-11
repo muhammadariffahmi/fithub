@@ -7,7 +7,9 @@ const port = 3000
 const path = require('path');  //include Path module to work with directories and file paths.
 const mongoose = require('mongoose');
 const methodOverride = require('method-override')
-
+const bcrypt = require('bcrypt');
+const session = require('express-session');
+const User = require('./models/user');
 const Activity = require('./models/activity');   //import the model
 
 //Connect to MongoDB - connection without error handling
@@ -48,6 +50,13 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
 
+const sessionOptions = { 
+    secret: 'mySecretKey', // Replace with a strong, unique key
+    resave: false, 
+    saveUninitialized: false 
+}
+app.use(session(sessionOptions));
+
 app.listen(port, () => {
     console.log(`Server has started and App is listening on port ${port}`);
 });
@@ -59,6 +68,13 @@ app.get('/', (req, res) => {
     //res.send("Welcome to Home page")
     res.render('index')
 })
+
+const requireLogin = (req, res, next) => {
+    if (!req.session.user_id) {
+        return res.redirect('/login')
+    }
+    next();
+}
 
 const activityTypeMap = {
   1: "Running",
@@ -84,7 +100,7 @@ const activityTypeMap = {
   other: "Other"
 };
 
-app.use('/tracker', (req, res, next) => {
+app.use('/tracker',  (req, res, next) => {
   if (req.method === 'POST') {
     req.body.duration = {
       hours: Number(req.body.hours) || 0,
@@ -109,7 +125,7 @@ app.use('/tracker', (req, res, next) => {
 });
 
 
-app.get('/tracker', async (req, res) => {
+app.get('/tracker',requireLogin, async (req, res) => {
   try {
     let activities = await Activity.find({}).sort({ datetime: -1 });
 
@@ -129,15 +145,15 @@ app.get('/tracker', async (req, res) => {
 
 
 
-app.get('/progress', (req, res) => {
+app.get('/progress',requireLogin, (req, res) => {
   res.render('progress'); 
 });
 
-app.get('/nutrition', (req, res) => {
+app.get('/nutrition',requireLogin, (req, res) => {
   res.render('nutrition'); 
 });
 
-app.get('/reminders', (req, res) => {
+app.get('/reminders',requireLogin, (req, res) => {
   res.render('reminders'); 
 });
 
@@ -145,11 +161,11 @@ app.get('/login', (req, res) => {
   res.render('login'); 
 });
 
-app.get('/dashboard', (req, res) => {
+app.get('/dashboard',requireLogin, (req, res) => {
   res.render('dashboard'); 
 });
 
-app.get('/profile', (req, res) => {
+app.get('/profile', requireLogin,(req, res) => {
   res.render('profile'); 
 });
 
@@ -188,7 +204,31 @@ app.delete('/activities/:id', async (req, res) => {
   }
 });
 
+app.post('/register', async (req,res) => {
+  const { name, email, password } = req.body;
+  const user = new User({ name, email, password });
+  await user.save();
+  req.session.user_id = user._id;
+  res.redirect('/dashboard');
+})
 
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    const foundUser = await User.findAndValidate(email, password);
+    if (foundUser) {
+        req.session.user_id = foundUser._id;
+        res.redirect('/dashboard');
+    }
+    else {
+        res.redirect('/login')
+    }
+})
+
+app.post('/logout', (req, res) => {
+    req.session.user_id = null;
+    // req.session.destroy();  /another way to destroy the session
+    res.redirect('/login');
+})
 
 
 

@@ -255,7 +255,7 @@
                                         placeholder="What did you do? How did you feel? Any goals for next time?"></textarea>
                                 </div>
 
-                                <div class="d-flex mt-4 align-items-center">
+                                <div class="d-flex mt-4 justify-content-between">
                                     <!-- Left side: Calories and link -->
                                     <div>
                                         <div class="container">
@@ -277,13 +277,24 @@
 
                                         </div>
                                     </div>
+                                    <div class="d-flex justify-content-end">
 
-                                    <!-- Right side: Submit button -->
-                                    <div class="ms-auto mb-4 mt-3">
-                                        <div class="container">
-                                            <input class="btn btn-secondary px-4 border border-primary fw-bold"
-                                                type="submit" value="SUBMIT">
+                                        <!-- Right side: Calculate button -->
+                                        <div class=" mb-4 mt-3">
+                                            <div class="container">
+                                                <input class="btn btn-secondary px-4 border border-primary fw-bold"
+                                                    type="button" value="OK" id="okBtn">
+                                            </div>
                                         </div>
+
+                                        <!-- Right side: Submit button -->
+                                        <div class=" mb-4 mt-3">
+                                            <div class="container">
+                                                <input class="btn btn-secondary px-4 border border-primary fw-bold"
+                                                    type="submit" value="SUBMIT" id="submitBtn" disabled>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -444,8 +455,8 @@
     <script src="/js/tracker/imagePreview.js"></script>
     <script src="/js/tracker/formDynamic.js"></script>
     <script src="/js/tracker/speedCalculate.js"></script>
-    <script src="/js/tracker/calorieCalculate.js"></script>
-    <script src="/js/tracker/imageEditDisplay.js"></script>
+    <!-- <script src="/js/tracker/calorieCalculate.js"></script> -->
+    <script src="/js/tracker/presubmit.js"></script>
     <script src="/js/tracker/loggedActivity.js"></script>
     <script src="/js/scripts.js"></script>
 
