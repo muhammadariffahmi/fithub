@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 
 const ActivitySchema = new mongoose.Schema({
+
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+
   title: { type: String, required: true },
   activityType: { type: String, required: true }, // Store activity name or ID
 

@@ -130,13 +130,13 @@ app.use('/tracker',  (req, res, next) => {
 });
 
 
-app.get('/tracker',requireLogin, async (req, res) => {
+app.get('/tracker', requireLogin, async (req, res) => {
   try {
-    let activities = await Activity.find({}).sort({ datetime: -1 });
+    let activities = await Activity.find({ user: req.session.user_id }).sort({ datetime: -1 });
 
     // Convert activityType number to string
     activities = activities.map(activity => {
-      const activityCopy = activity.toObject(); // Convert Mongoose doc to plain object
+      const activityCopy = activity.toObject();
       activityCopy.activityTypeLabel = activityTypeMap[activity.activityType] || "Unknown";
       return activityCopy;
     });
@@ -147,6 +147,7 @@ app.get('/tracker',requireLogin, async (req, res) => {
     res.render('tracker', { activities: [] });
   }
 });
+
 
 
 
@@ -183,26 +184,28 @@ app.get('/register', (req, res) => {
   res.render('register'); 
 });
 
-app.post('/tracker', async (req, res) => {
-  console.log("POST /tracker hit"); // 🟡 Step 1: Make sure this shows
+app.post('/tracker', requireLogin, async (req, res) => {
+  console.log("POST /tracker hit");
 
   try {
-    console.log("Form data:", req.body); // 🟡 Step 2: Check form data
+    console.log("Form data:", req.body);
 
-    const newActivity = new Activity(req.body);
+    const newActivity = new Activity({
+      ...req.body,
+      user: req.session.user_id // Link activity to logged-in user
+    });
+
     await newActivity.save();
 
-    console.log("Activity saved:", newActivity); // 🟢 Step 3: Confirm saved
+    console.log("Activity saved:", newActivity);
 
-    // res.status(201).send('Activity saved successfully');
     res.redirect('/tracker');
-
-
   } catch (error) {
-    console.error("Error saving activity:", error); // 🔴 Step 4: Catch any errors
-    // res.status(500).send('Error saving activity');
+    console.error("Error saving activity:", error);
+    res.status(500).send("Internal Server Error");
   }
 });
+
 
 app.delete('/activities/:id', async (req, res) => {
   try {
