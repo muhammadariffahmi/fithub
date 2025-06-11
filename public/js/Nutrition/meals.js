@@ -45,21 +45,29 @@ function renderMeals() {
     mealList.innerHTML = ''; // Clear previous meal cards
     mealData.forEach((meal, index) => {
         const card = `
-          <div class="col-md-4 meal-card mb-4">
+        <div class="col-md-4 meal-card mb-4">
             <div class="card" onclick="showMealDetails(${index})" style="cursor:pointer">
-              <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
-              <div class="card-body">
-                <h5 class="meal-name card-title">${meal.strMeal}</h5>
-                <p class="card-text">${meal.strCategory}</p>
-                <p><strong>Calories: ${calorieMap[meal.strMeal] || 'N/A'} kcal</strong></p>
-                <div class="d-flex">
-                    <button class="btn btn-success" onclick="addFavorite(${index}); event.stopPropagation();">Add to Favorites</button>
-                    <button class="btn btn-secondary ms-2" onclick="addMealToIntake(${index}); event.stopPropagation();">Add to Daily Intake</button>
+            <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                <h5 class="meal-name card-title mb-0">${meal.strMeal}</h5>
+                <button class="btn btn-light text-danger border-0" title="Add to Favorites" onclick="addFavorite(${index}); event.stopPropagation();">
+                    <i class="bi bi-heart-fill fs-5"></i>
+                </button>
                 </div>
-              </div>
+                <p class="card-text mb-1">${meal.strCategory}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                <p class="text-primary mb-0"><strong>Calories: ${calorieMap[meal.strMeal] || 'N/A'} kcal</strong></p>
+                <button class="btn btn-light text-light bg-success border-0 ms-2" title="Add to Daily Intake" onclick="addMealToIntake(${index}); event.stopPropagation();">
+                    <i class="bi bi-plus"></i>
+                </button>
+                </div>
             </div>
-          </div>
+            </div>
+        </div>
         `;
+
+
         mealList.innerHTML += card;
     });
 }
@@ -127,7 +135,7 @@ function renderFavoriteMeals() {
 
     const favorites = favoriteMeals.map(id => mealData[id]).filter(Boolean);
     if (favorites.length === 0) {
-        favList.innerHTML = '<p class="text-secondary">You have no favorite meals yet.</p>';
+        favList.innerHTML = '<p class="text-primary px-3">You have no favorite meals yet.</p>';
         return;
     }
 

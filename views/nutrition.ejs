@@ -44,72 +44,101 @@
     style="background-image: url('../images/header-bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="row">
 
-      <!-- Calorie calculator -->
-      <div class="col-md-6 bg-light px-5 pb-3 pt-4 mt-5 rounded">
 
-        <div class="d-flex justify-content-between">
-          <h2 class="text-dark">Calorie Calculator</h2>
-          <a href="#" data-bs-toggle="modal" data-bs-target="#bmrModal"><i
-              class="bi bi-info-circle-fill fs-4 text-dark"></i></a>
+
+      <div class="container mt-5">
+        <div class="row mx-5">
+          <!-- Left Column: 8/12 -->
+          <div class="col-lg-8 pe-lg-3 mt-3">
+            <div class="bg-light rounded-3 me-lg-3">
+
+              <!-- Favourite meals -->
+              <div class="container px-4 pt-3">
+                <h4 class="text-dark  ">Your Favorite Meals</h4>
+                <div class="row" id="favoriteMealsList">
+                  <!-- Favorite meals will appear here -->
+                </div>
+              </div>
+
+              <!-- All meals -->
+              <div class=" mt-2 px-4">
+                <h2 class="text-dark  ">Choose Your Meals</h2>
+
+                <div class="d-flex justify-content-between mb-3">
+
+                  <!-- Search bar -->
+                  <input type="text" id="mealSearch" class="form-control w-75" placeholder="Search meals by name"
+                    onkeyup="searchMeals()">
+                  <button class="btn btn-secondary ms-2 w-25"><i class="bi bi-search me-2"></i>Search</button>
+                </div>
+
+                <div class="row" id="mealList">
+                  <!-- Meals will be dynamically rendered here from TheMealDB API -->
+                </div>
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+          <!-- Right Column: 4/12 -->
+          <div class="col-lg-4 bg-light rounded-3 mt-3 h-auto align-self-start">
+            <div class="mt-4  px-3">
+
+              <!-- Calorie calculator -->
+              <div>
+
+                <div class="d-flex justify-content-between">
+                  <h3 class="text-dark">Calorie Calculator</h3>
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#bmrModal"><i
+                      class="bi bi-info-circle-fill fs-4 text-dark"></i></a>
+                </div>
+
+
+
+                <!-- Form -->
+                <label for="goal" class="text-dark mt-2">Your Fitness Goal:</label>
+                <select id="goal" class="form-select mb-2 mt-1">
+                  <option value="lose">Lose Weight</option>
+                  <option value="maintain">Maintain Weight</option>
+                  <option value="gain">Gain Muscle</option>
+                </select>
+
+                <!-- How to calculate -->
+                <!-- <p><a class="text-dark" href="#" data-bs-toggle="modal" data-bs-target="#bmrModal">How we calculate it?</a></p> -->
+
+                <!-- Calculate button -->
+                <button class="btn btn-secondary mt-1 fw-semibold" id="calculateBtn">Calculate</button>
+
+                <!-- Calorie result -->
+                <p id="calorieResult" class="fw-bold text-primary mt-2"></p>
+              </div>
+
+              <div>
+
+
+                <!-- Form -->
+                <input type="text" id="foodName" class="form-control mb-2 mt-5" placeholder="Meal name">
+                <input type="number" id="foodCalories" class="form-control mb-3" placeholder="Calories (kcal)">
+
+                <!-- Add button -->
+                <button class="btn btn-secondary mb-3 fw-semibold" onclick="addIntake()">Add Meal</button>
+
+                <!-- Total calorie -->
+                <p class="text-primary pb-1">Total Calories: <span id="totalCalories" class="fw-bold">0</span> kcal
+                </p>
+                <ul id="intakeList" class="list-group pb-3"></ul>
+
+              </div>
+
+            </div>
+          </div>
+
+
         </div>
 
-        <!-- Form -->
-        <label for="goal" class="text-dark mt-2">Your Fitness Goal:</label>
-        <select id="goal" class="form-select mb-2 mt-1">
-          <option value="lose">Lose Weight</option>
-          <option value="maintain">Maintain Weight</option>
-          <option value="gain">Gain Muscle</option>
-        </select>
-
-        <!-- How to calculate -->
-        <!-- <p><a class="text-dark" href="#" data-bs-toggle="modal" data-bs-target="#bmrModal">How we calculate it?</a></p> -->
-
-        <!-- Calculate button -->
-        <button class="btn btn-secondary mt-1" id="calculateBtn">Calculate</button>
-
-        <!-- Calorie result -->
-        <p id="calorieResult" class="fw-bold text-primary mt-2"></p>
-      </div>
-
-      <!-- Favourite meals -->
-      <div class="container mt-3">
-        <h2 class="text-light mt-3">Your Favorite Meals</h2>
-        <div class="row" id="favoriteMealsList">
-          <!-- Favorite meals will appear here -->
-        </div>
-      </div>
-
-      <!-- Daily intake -->
-      <div class="container row mt-4">
-        <div class="col-md-12">
-          <h2 class="text-light mb-2">Track Daily Intake</h2>
-
-          <!-- Form -->
-          <input type="text" id="foodName" class="form-control mb-2" placeholder="Food name">
-          <input type="number" id="foodCalories" class="form-control mb-2" placeholder="Calories">
-
-          <!-- Add button -->
-          <button class="btn btn-secondary mb-3" onclick="addIntake()">Add to Daily Intake</button>
-
-          <!-- Total calorie -->
-          <p class="text-secondary">Total Calories Today: <span id="totalCalories" class="fw-bold">0</span> kcal</p>
-          <ul id="intakeList" class="list-group"></ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- All meals -->
-    <div class=" mt-5">
-      <div class="d-flex justify-content-between mb-4">
-
-        <!-- Search bar -->
-        <input type="text" id="mealSearch" class="form-control w-75" placeholder="Search meals by name"
-          onkeyup="searchMeals()">
-        <button class="btn btn-secondary ms-2 w-25"><i class="bi bi-search me-2"></i>Search</button>
-      </div>
-
-      <div class="row" id="mealList">
-        <!-- Meals will be dynamically rendered here from TheMealDB API -->
       </div>
     </div>
 
@@ -139,8 +168,10 @@
           <div class="modal-body text-dark">
             <p><strong>We use the Mifflin-St Jeor Equation to calculate BMR (Basal Metabolic Rate):</strong></p>
             <ul>
-              <li><strong>For males:</strong> BMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age) + 5</li>
-              <li><strong>For females:</strong> BMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age) − 161</li>
+              <li><strong>For males:</strong> BMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age) + 5
+              </li>
+              <li><strong>For females:</strong> BMR = (10 × weight in kg) + (6.25 × height in cm) − (5 × age) −
+                161</li>
             </ul>
             <p>Then we adjust based on your fitness goal:</p>
             <ul>
