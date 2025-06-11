@@ -65,9 +65,14 @@ app.listen(port, () => {
 // GET method route to root route (/), the homepage
 // Render an EJS file, home.ejs home page back to users using res.render()
 app.get('/', (req, res) => {
-    //res.send("Welcome to Home page")
-    res.render('index')
-})
+    if (req.session && req.session.user_id) {
+        res.redirect('/dashboard');
+    } else {
+        res.render('index');
+    }
+});
+
+
 
 const requireLogin = (req, res, next) => {
     if (!req.session.user_id) {
@@ -161,9 +166,13 @@ app.get('/login', (req, res) => {
   res.render('login'); 
 });
 
-app.get('/dashboard',requireLogin, (req, res) => {
-  res.render('dashboard'); 
+app.get('/dashboard', (req, res) => {
+    if (!req.session.user_id) {
+        return res.redirect('/');
+    }
+    res.render('dashboard'); // or pass user data if needed
 });
+
 
 app.get('/profile', requireLogin,(req, res) => {
   res.render('profile'); 
@@ -227,7 +236,7 @@ app.post('/login', async (req, res) => {
 app.post('/logout', (req, res) => {
     req.session.user_id = null;
     // req.session.destroy();  /another way to destroy the session
-    res.redirect('/login');
+    res.redirect('/');
 })
 
 
