@@ -121,6 +121,9 @@ function calculateCalories() {
     caloriesResult.textContent = `Estimated Calories Burned: ${calories.toFixed(1)} kcal`;
     caloriesResult.style.display = "block";
     howCalculateBurnt.style.display = "block";
+
+    document.getElementById("caloriesBurned").value = calories.toFixed(1);
+
 }
 
 function getDurationInMinutes() {

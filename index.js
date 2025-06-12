@@ -51,7 +51,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
 
 const sessionOptions = { 
-    secret: 'mySecretKey', // Replace with a strong, unique key
+    secret: 'FitHubWIF2003Team07okayokayokay', 
     resave: false, 
     saveUninitialized: false 
 }
