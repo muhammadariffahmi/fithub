@@ -15,6 +15,128 @@
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+    <style>
+        body {
+            background: #f6f7fb;
+        }
+        .dashboard-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            margin-top: 60px;
+            background: rgba(255,255,255,0.10);
+            border-radius: 24px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+            padding: 2.5rem 2rem 2rem 2rem;
+            backdrop-filter: blur(2px);
+        }
+        .fitness-title {
+            color: #fff;
+            text-align: left;
+            margin-bottom: 2.2rem;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.45);
+        }
+        .summary-row {
+            display: flex;
+            gap: 2.2rem;
+            margin-bottom: 2.8rem;
+            justify-content: center;
+        }
+        .summary-card {
+            background: rgba(255,255,255,0.92);
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 2rem 2.2rem;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            transition: box-shadow 0.2s;
+        }
+        .summary-card:hover {
+            box-shadow: 0 6px 24px rgba(151,12,60,0.13);
+        }
+        .summary-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.7rem;
+        }
+        .summary-card .value {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.2rem;
+        }
+        .summary-card .label {
+            font-size: 1.08rem;
+            color: #888;
+        }
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 2.2rem;
+            justify-items: center;
+            margin: 0 auto;
+            width: fit-content;
+        }
+        .chart-card {
+            background: rgba(255,255,255,0.97);
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 1.7rem 1.5rem 1.2rem 1.5rem;
+            width: 100%;
+            max-width: 420px;
+            min-width: 260px;
+            height: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .chart-card h5 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 1rem;
+        }
+        .chart-card canvas {
+            width: 100% !important;
+            height: 220px !important;
+            max-width: 100% !important;
+            max-height: 220px !important;
+            min-height: 180px;
+            display: block;
+        }
+        @media (max-width: 1200px) {
+            .dashboard-wrapper {
+                max-width: 98vw;
+                padding: 1.2rem 0.5rem;
+            }
+        }
+        @media (max-width: 900px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                justify-items: center;
+            }
+            .dashboard-wrapper {
+                padding: 1.2rem 0.2rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .summary-row {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            .chart-card {
+                max-width: 98vw;
+                min-width: unset;
+            }
+            .dashboard-wrapper {
+                padding: 0.5rem 0.1rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -41,41 +163,55 @@
     </nav>
 
     <!-- main content -->
-    <main class="bg-primary pb-4 pt-5"
-        style="background-image: url('../images/header-bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-        <div class="container pt-5">
-            <h2 class="container-sm py-4 text-light ">Your Fitness Progress</h2>
-
-            <!-- chart 1: cardio activity -->
-            <div class="chart-container bg-light p-4 rounded shadow-sm">
-                <h5 class="text-center text-dark mb-3">Cardio Activity Overview</h5>
-                <canvas id="activityDurationChart"></canvas>
-            </div>
-
-            <!-- chart 2: strength training -->
-            <div class="chart-container bg-light p-4 rounded shadow-sm mt-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="text-dark mb-0">Strength Training Breakdown</h5>
-                    <select id="strengthSelect" class="form-select w-auto">
-                        <option value="bench">Bench Press</option>
-                        <option value="deadlift">Deadlift</option>
-                        <option value="squat">Squat</option>
-                    </select>
+    <main class="bg-primary pb-4 pt-5" style="background-image: url('../images/header-bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; min-height: 100vh;">
+        <div class="dashboard-wrapper">
+            <h2 class="fitness-title text-light">Your Fitness Progress</h2>
+            <!-- Summary Row -->
+            <div class="summary-row">
+                <div class="summary-card">
+                    <span class="icon"><i class="bi bi-activity text-success"></i></span>
+                    <span class="value">42%</span>
+                    <span class="label">Weekly Progress</span>
                 </div>
-                <canvas id="strengthChart"></canvas>
+                <div class="summary-card">
+                    <span class="icon"><i class="bi bi-geo-alt text-primary"></i></span>
+                    <span class="value">40 Km</span>
+                    <span class="label">Weekly Running</span>
+                </div>
+                <div class="summary-card">
+                    <span class="icon"><i class="bi bi-fire text-danger"></i></span>
+                    <span class="value">230 Kcal</span>
+                    <span class="label">Daily Calories</span>
+                </div>
+                <div class="summary-card">
+                    <span class="icon"><i class="bi bi-clock-history text-warning"></i></span>
+                    <span class="value">18:34:21</span>
+                    <span class="label">Total Training Time</span>
+                </div>
             </div>
-
-            <!-- steps & bodyweight row:  horizontal layout -->
-            <div class="d-flex justify-content-center align-items-start gap-4 mt-5" style="flex-wrap: nowrap;">
-                <!-- steps chart -->
-                <div class="chart-container bg-light p-4 rounded shadow-sm" style="width: 700px;">
-                    <h5 class="text-center text-dark mb-3">Steps Per Day</h5>
+            <!-- Charts Grid -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h5>Cardio Activity Overview</h5>
+                    <canvas id="activityDurationChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <div class="d-flex justify-content-between align-items-center w-100 mb-2" style="gap: 1rem;">
+                        <h5 class="mb-0">Strength Training</h5>
+                        <select id="strengthSelect" class="form-select form-select-sm w-auto" style="min-width: 90px;">
+                            <option value="bench">Bench Press</option>
+                            <option value="deadlift">Deadlift</option>
+                            <option value="squat">Squat</option>
+                        </select>
+                    </div>
+                    <canvas id="strengthChart"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h5>Steps Per Day</h5>
                     <canvas id="stepsChart"></canvas>
                 </div>
-
-                <!-- bodyweight chart -->
-                <div class="chart-container bg-light p-4 rounded shadow-sm" style="width: 700px;">
-                    <h5 class="text-center text-dark mb-3">Bodyweight Exercises Breakdown</h5>
+                <div class="chart-card">
+                    <h5>Bodyweight Exercises</h5>
                     <canvas id="bodyweightChart"></canvas>
                 </div>
             </div>
