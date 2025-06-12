@@ -347,7 +347,7 @@
                                                         data-id="<%= activity._id %>" data-title="<%= activity.title %>"
                                                         data-datetime="<%= new Date(activity.datetime).toLocaleString() %>"
                                                         data-duration="<%= activity.duration.hours %>h <%= activity.duration.minutes %>m <%= activity.duration.seconds %>s"
-                                                        data-distance="<%= activity.distance %> km"
+                                                        data-distance="<%= typeof activity.distance === 'number' && activity.distance > 0 ? activity.distance + ' km' : '' %>"
                                                         data-rate="<%= activity.rate %>"
                                                         data-notes="<%= activity.notes %>"
                                                         data-activity-type="<%= activity.activityTypeLabel %>"
@@ -357,15 +357,15 @@
                                                         data-sets="<%= activity.sets %>"
                                                         data-reps="<%= activity.reps && activity.reps.length ? activity.reps.join(', ') : '' %>"
                                                         data-calories-burned="<%= activity.caloriesBurned %>">
-                                                            <strong>
-                                                                <%= activity.title || 'Untitled Activity' %>
-                                                            </strong><br>
-                                                            <small>
-                                                                <%= new Date(activity.datetime).toLocaleString() %>
-                                                            </small><br>
-                                                            <span class="text-input">
-                                                                <%= activity.activityTypeLabel %>
-                                                            </span>
+                                                        <strong>
+                                                            <%= activity.title || 'Untitled Activity' %>
+                                                        </strong><br>
+                                                        <small>
+                                                            <%= new Date(activity.datetime).toLocaleString() %>
+                                                        </small><br>
+                                                        <span class="text-input">
+                                                            <%= activity.activityTypeLabel %>
+                                                        </span>
                                                     </div>
 
                                                     <!-- Delete button: minimal width -->
@@ -404,18 +404,20 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p><strong>Activity:</strong> <span id="modalActivityType"></span></p>
+                    <p id="modalActivityTypeRow"><strong>Activity:</strong> <span id="modalActivityType"></span></p>
                     <p><strong>Date & Time:</strong> <span id="modalDatetime"></span></p>
-                    <p><strong>Duration:</strong> <span id="modalDuration"></span></p>
-                    <p><strong>Distance:</strong> <span id="modalDistance"></span></p>
-                    <p><strong>Speed:</strong> <span id="modalSpeed"></span></p>
-                    <p><strong>Weight Used:</strong> <span id="modalWeight"></span></p>
-                    <p><strong>Steps:</strong> <span id="modalSteps"></span></p>
-                    <p><strong>Sets:</strong> <span id="modalSets"></span></p>
-                    <p><strong>Reps:</strong> <span id="modalReps"></span></p>
-                    <p><strong>Rate:</strong> <span id="modalRate"></span></p>
-                    <p><strong>Notes:</strong> <span id="modalNotes"></span></p>
-                    <p class="text-primary"><strong>Calories Burnt:</strong> <span id="modalCalories"></span></p>
+                    <p id="modalDurationRow"><strong>Duration:</strong> <span id="modalDuration"></span></p>
+                    <p id="modalDistanceRow"><strong>Distance:</strong> <span id="modalDistance"></span></p>
+                    <p id="modalSpeedRow"><strong>Speed:</strong> <span id="modalSpeed"></span></p>
+                    <p id="modalWeightRow"><strong>Weight Used:</strong> <span id="modalWeight"></span></p>
+                    <p id="modalStepsRow"><strong>Steps:</strong> <span id="modalSteps"></span></p>
+                    <p id="modalSetsRow"><strong>Sets:</strong> <span id="modalSets"></span></p>
+                    <p id="modalRepsRow"><strong>Reps:</strong> <span id="modalReps"></span></p>
+                    <p id="modalRateRow"><strong>Rate:</strong> <span id="modalRate"></span></p>
+                    <p id="modalNotesRow"><strong>Notes:</strong> <span id="modalNotes"></span></p>
+                    <p id="modalCaloriesRow" class="text-primary"><strong>Calories Burnt:</strong> <span
+                            id="modalCalories"></span></p>
+
                 </div>
             </div>
         </div>
