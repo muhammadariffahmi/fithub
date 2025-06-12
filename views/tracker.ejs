@@ -349,16 +349,23 @@
                                                         data-duration="<%= activity.duration.hours %>h <%= activity.duration.minutes %>m <%= activity.duration.seconds %>s"
                                                         data-distance="<%= activity.distance %> km"
                                                         data-rate="<%= activity.rate %>"
-                                                        data-notes="<%= activity.notes %>">
-                                                        <strong>
-                                                            <%= activity.title || 'Untitled Activity' %>
-                                                        </strong><br>
-                                                        <small>
-                                                            <%= new Date(activity.datetime).toLocaleString() %>
-                                                        </small><br>
-                                                        <span class="text-input">
-                                                            <%= activity.activityTypeLabel %>
-                                                        </span>
+                                                        data-notes="<%= activity.notes %>"
+                                                        data-activity-type="<%= activity.activityTypeLabel %>"
+                                                        data-speed="<%= activity.speed %>"
+                                                        data-weight-used="<%= activity.weightUsed ? activity.weightUsed.weight + ' ' + activity.weightUsed.unit : '' %>"
+                                                        data-steps="<%= activity.steps %>"
+                                                        data-sets="<%= activity.sets %>"
+                                                        data-reps="<%= activity.reps && activity.reps.length ? activity.reps.join(', ') : '' %>"
+                                                        data-calories-burned="<%= activity.caloriesBurned %>">
+                                                            <strong>
+                                                                <%= activity.title || 'Untitled Activity' %>
+                                                            </strong><br>
+                                                            <small>
+                                                                <%= new Date(activity.datetime).toLocaleString() %>
+                                                            </small><br>
+                                                            <span class="text-input">
+                                                                <%= activity.activityTypeLabel %>
+                                                            </span>
                                                     </div>
 
                                                     <!-- Delete button: minimal width -->
@@ -397,11 +404,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <p><strong>Activity:</strong> <span id="modalActivityType"></span></p>
                     <p><strong>Date & Time:</strong> <span id="modalDatetime"></span></p>
                     <p><strong>Duration:</strong> <span id="modalDuration"></span></p>
                     <p><strong>Distance:</strong> <span id="modalDistance"></span></p>
+                    <p><strong>Speed:</strong> <span id="modalSpeed"></span></p>
+                    <p><strong>Weight Used:</strong> <span id="modalWeight"></span></p>
+                    <p><strong>Steps:</strong> <span id="modalSteps"></span></p>
+                    <p><strong>Sets:</strong> <span id="modalSets"></span></p>
+                    <p><strong>Reps:</strong> <span id="modalReps"></span></p>
                     <p><strong>Rate:</strong> <span id="modalRate"></span></p>
                     <p><strong>Notes:</strong> <span id="modalNotes"></span></p>
+                    <p class="text-primary"><strong>Calories Burnt:</strong> <span id="modalCalories"></span></p>
                 </div>
             </div>
         </div>
