@@ -6,20 +6,68 @@ let activityData = {
     bodyweight: []
 };
 
-// Fetch data from server
+// fetch data from server
 async function fetchActivityData(timeRange = 7) {
     try {
+        console.log('Fetching activity data...');
         const response = await fetch(`/api/activities?timeRange=${timeRange}`);
         const data = await response.json();
         
-        // Process and categorize the data
+        // calc week's activities
+        const now = new Date();
+        const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+        const thisWeekActivities = data.filter(a => new Date(a.datetime) >= oneWeekAgo);
+        
+        // calc weekly running distance
+        const runningActivities = thisWeekActivities.filter(a => a.activityTypeLabel === 'Running');
+        const weeklyRunningDistance = runningActivities.reduce((sum, a) => sum + (a.distance || 0), 0);
+        
+        // calc average daily calories
+        const totalCalories = thisWeekActivities.reduce((sum, a) => sum + (a.caloriesBurned || 0), 0);
+        const averageDailyCalories = Math.round(totalCalories / 7);
+        
+        // calc total training time
+        const totalMinutes = thisWeekActivities.reduce((sum, a) => {
+            return sum + (a.duration?.hours * 60 + a.duration?.minutes || 0);
+        }, 0);
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+        const seconds = thisWeekActivities.reduce((sum, a) => sum + (a.duration?.seconds || 0), 0) % 60;
+        const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        // Update all summary cards
+        const summaryCards = document.querySelectorAll('.summary-card');
+        if (summaryCards.length >= 4) {
+            // Activities This Week
+            summaryCards[0].querySelector('.value').textContent = thisWeekActivities.length;
+            summaryCards[0].querySelector('.label').textContent = 'Activities This Week';
+            summaryCards[0].querySelector('.icon').innerHTML = '<i class="bi bi-calendar-check text-primary"></i>';
+            
+            // Weekly Running
+            summaryCards[1].querySelector('.value').textContent = `${weeklyRunningDistance.toFixed(1)} Km`;
+            summaryCards[1].querySelector('.label').textContent = 'Weekly Running';
+            summaryCards[1].querySelector('.icon').innerHTML = '<i class="bi bi-geo-alt text-primary"></i>';
+            
+            // Average Daily Calories
+            summaryCards[2].querySelector('.value').textContent = `${averageDailyCalories} Kcal`;
+            summaryCards[2].querySelector('.label').textContent = 'Average Daily Calories';
+            summaryCards[2].querySelector('.icon').innerHTML = '<i class="bi bi-fire text-danger"></i>';
+            
+            // Total Training Time
+            summaryCards[3].querySelector('.value').textContent = formattedTime;
+            summaryCards[3].querySelector('.label').textContent = 'Total Training Time';
+            summaryCards[3].querySelector('.icon').innerHTML = '<i class="bi bi-clock-history text-warning"></i>';
+        }
+        
+        // Process and categorize the data for charts
         activityData = {
-            cardio: data.filter(a => ['running', 'cycling', 'swimming', 'walking', 'hiking'].includes(a.activityType)),
-            strength: data.filter(a => ['weightlifting', 'deadlifts', 'bench press', 'squat'].includes(a.activityType)),
+            cardio: data.filter(a => ['Running', 'Walking', 'Hiking', 'Swimming', 'Cycling'].includes(a.activityTypeLabel)),
+            strength: data.filter(a => ['Weightlifting', 'Deadlifts', 'Kettlebell Swings', 'Bicep Curls', 'Tricep Dips', 'Bench Press', 'Squat'].includes(a.activityTypeLabel)),
             steps: data.filter(a => a.steps),
-            bodyweight: data.filter(a => ['push-ups', 'pull-ups', 'squats', 'lunges', 'planks'].includes(a.activityType))
+            bodyweight: data.filter(a => ['Push-ups', 'Pull-ups', 'Squats', 'Lunges', 'Planks', 'Sit-ups', 'Mountain Climbers', 'Burpees', 'Leg Raises', 'Glute Bridges'].includes(a.activityTypeLabel))
         };
         
+        console.log('Processed activity data:', activityData);
         updateAllCharts();
     } catch (error) {
         console.error('Error fetching activity data:', error);
@@ -98,16 +146,16 @@ function initStrengthChart() {
     strengthChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"],
+            labels: [],
             datasets: [
                 {
                     label: "weight used (kg)",
-                    data: [100, 110, 105, 115, 120, 125, 130],
+                    data: [],
                     backgroundColor: "#970C3C"
                 },
                 {
                     label: "reps",
-                    data: [30, 36, 32, 40, 38, 42, 45],
+                    data: [],
                     backgroundColor: "#7FB3D5"
                 }
             ]
@@ -202,11 +250,10 @@ function initBodyweightChart() {
     bodyweightChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ["push-ups", "squats", "plank (min)"],
+            labels: [],
             datasets: [{
-                label: "bodyweight exercises (weekly total)",
-                data: [150, 200, 60],
-                backgroundColor: ["#970C3C", "#7FB3D5", "#D4A59A"]
+                data: [],
+                backgroundColor: []
             }]
         },
         options: {
@@ -220,6 +267,13 @@ function initBodyweightChart() {
                         boxWidth: 12,
                         padding: 8
                     }
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.label}: ${context.raw} reps`;
+                        }
+                    }
                 }
             }
         }
@@ -231,7 +285,39 @@ function updateActivityDurationChart() {
     const cardioType = document.getElementById('cardioType').value;
     const filteredData = cardioType === 'all' 
         ? activityData.cardio 
-        : activityData.cardio.filter(a => a.activityType === cardioType);
+        : activityData.cardio.filter(a => a.activityTypeLabel === cardioType);
+
+    if (filteredData.length === 0) {
+        activityDurationChart.data.labels = ['No Data'];
+        activityDurationChart.data.datasets = [
+            {
+                label: "duration (min)",
+                data: [0],
+                borderColor: "#970C3C",
+                backgroundColor: "rgba(151, 12, 60, 0.2)",
+                tension: 0.3,
+                fill: true
+            },
+            {
+                label: "distance (km)",
+                data: [0],
+                borderColor: "#7FB3D5",
+                backgroundColor: "rgba(127, 179, 213, 0.2)",
+                tension: 0.3,
+                fill: true
+            },
+            {
+                label: "speed (km/h)",
+                data: [0],
+                borderColor: "#D4A59A",
+                backgroundColor: "rgba(212, 165, 154, 0.2)",
+                tension: 0.3,
+                fill: true
+            }
+        ];
+        activityDurationChart.update();
+        return;
+    }
 
     const dates = [...new Set(filteredData.map(a => new Date(a.datetime).toLocaleDateString()))];
     const durationData = dates.map(date => {
@@ -256,21 +342,88 @@ function updateActivityDurationChart() {
 
 function updateStrengthChart() {
     const exercise = document.getElementById('strengthSelect').value;
-    const filteredData = activityData.strength.filter(a => a.activityType === exercise);
+    console.log('Selected exercise:', exercise);
+    console.log('All strength data:', activityData.strength);
     
-    const dates = [...new Set(filteredData.map(a => new Date(a.datetime).toLocaleDateString()))];
-    const weightData = dates.map(date => {
-        const dayActivities = filteredData.filter(a => new Date(a.datetime).toLocaleDateString() === date);
-        return Math.max(...dayActivities.map(a => a.weight || 0));
+    // Add detailed logging of each strength activity
+    activityData.strength.forEach(activity => {
+        console.log('Activity:', {
+            type: activity.activityTypeLabel,
+            weight: activity.weightUsed,
+            reps: activity.reps,
+            datetime: activity.datetime
+        });
     });
-    const repsData = dates.map(date => {
-        const dayActivities = filteredData.filter(a => new Date(a.datetime).toLocaleDateString() === date);
-        return dayActivities.reduce((sum, a) => sum + (a.reps || 0), 0);
+    
+    const filteredData = activityData.strength.filter(a => {
+        const matches = a.activityTypeLabel.toLowerCase() === exercise.toLowerCase();
+        console.log('Comparing:', {
+            activityType: a.activityTypeLabel,
+            selectedExercise: exercise,
+            matches: matches
+        });
+        return matches;
+    });
+    console.log('Filtered data:', filteredData);
+    
+    if (filteredData.length === 0) {
+        strengthChart.data.labels = ['No Data'];
+        strengthChart.data.datasets = [
+            {
+                label: "weight used (kg)",
+                data: [0],
+                backgroundColor: "#970C3C"
+            },
+            {
+                label: "reps",
+                data: [0],
+                backgroundColor: "#7FB3D5"
+            }
+        ];
+        strengthChart.update();
+        return;
+    }
+
+    // Sort activities by date
+    const sortedData = filteredData.sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
+    
+    // Get dates and format them
+    const dates = sortedData.map(a => new Date(a.datetime).toLocaleDateString());
+    
+    // Calculate weight and reps data
+    const weightData = sortedData.map(activity => {
+        const weight = activity.weightUsed?.weight || 0;
+        console.log('Weight for activity:', {
+            date: activity.datetime,
+            weight: weight,
+            weightUsed: activity.weightUsed
+        });
+        return weight;
+    });
+    
+    const repsData = sortedData.map(activity => {
+        const totalReps = !activity.reps || !Array.isArray(activity.reps) ? 0 : 
+            activity.reps.reduce((sum, rep) => sum + rep, 0);
+        console.log('Reps for activity:', {
+            date: activity.datetime,
+            reps: activity.reps,
+            totalReps: totalReps
+        });
+        return totalReps;
     });
 
+    console.log('Final chart data:', {
+        dates: dates,
+        weightData: weightData,
+        repsData: repsData
+    });
+
+    // Update chart data
     strengthChart.data.labels = dates;
     strengthChart.data.datasets[0].data = weightData;
     strengthChart.data.datasets[1].data = repsData;
+    
+    // Update the chart
     strengthChart.update();
 }
 
@@ -278,6 +431,19 @@ function updateStepsChart() {
     const view = document.getElementById('stepsView').value;
     const stepsData = activityData.steps;
     
+    if (stepsData.length === 0) {
+        stepsChart.data.labels = ['No Data'];
+        stepsChart.data.datasets = [{
+            label: "steps",
+            data: [0],
+            backgroundColor: "rgba(127, 179, 213, 0.2)",
+            borderColor: "#7FB3D5",
+            pointBackgroundColor: "#970C3C"
+        }];
+        stepsChart.update();
+        return;
+    }
+
     if (view === 'daily') {
         const dates = [...new Set(stepsData.map(a => new Date(a.datetime).toLocaleDateString()))];
         const dailySteps = dates.map(date => {
@@ -310,47 +476,63 @@ function updateStepsChart() {
 }
 
 function updateBodyweightChart() {
-    const view = document.getElementById('bodyweightView').value;
-    const exercises = ['push-ups', 'squats', 'planks'];
+    const exercise = document.getElementById('bodyweightSelect').value;
+    const filteredData = activityData.bodyweight.filter(a => a.activityTypeLabel === exercise);
     
-    if (view === 'total') {
-        const totals = exercises.map(exercise => {
-            return activityData.bodyweight
-                .filter(a => a.activityType === exercise)
-                .reduce((sum, a) => sum + (a.reps || 0), 0);
-        });
-
-        bodyweightChart.data.labels = exercises;
-        bodyweightChart.data.datasets[0].data = totals;
-    } else {
-        // Progression view - show last 7 days
-        const dates = [...new Set(activityData.bodyweight.map(a => new Date(a.datetime).toLocaleDateString()))]
-            .sort((a, b) => new Date(a) - new Date(b))
-            .slice(-7);
-
-        bodyweightChart.data.labels = dates;
-        bodyweightChart.data.datasets = exercises.map(exercise => ({
-            label: exercise,
-            data: dates.map(date => {
-                const dayActivities = activityData.bodyweight.filter(a => 
-                    a.activityType === exercise && 
-                    new Date(a.datetime).toLocaleDateString() === date
-                );
-                return dayActivities.reduce((sum, a) => sum + (a.reps || 0), 0);
-            }),
-            backgroundColor: exercise === 'push-ups' ? '#970C3C' : 
-                           exercise === 'squats' ? '#7FB3D5' : '#D4A59A'
-        }));
+    if (filteredData.length === 0) {
+        bodyweightChart.data.labels = ['No Data'];
+        bodyweightChart.data.datasets = [{
+            data: [1],
+            backgroundColor: ['#e0e0e0']
+        }];
+        bodyweightChart.update();
+        return;
     }
+
+    // Get the most recent activity
+    const latestActivity = filteredData.sort((a, b) => new Date(b.datetime) - new Date(a.datetime))[0];
+    
+    if (!latestActivity.reps || latestActivity.reps.length === 0) {
+        bodyweightChart.data.labels = ['No Reps Data'];
+        bodyweightChart.data.datasets = [{
+            data: [1],
+            backgroundColor: ['#e0e0e0']
+        }];
+        bodyweightChart.update();
+        return;
+    }
+
+    // Create labels for each set
+    const labels = latestActivity.reps.map((_, index) => `Set ${index + 1}`);
+    
+    // Create dataset with the reps data
+    bodyweightChart.data.labels = labels;
+    bodyweightChart.data.datasets = [{
+        label: `${exercise} Reps`,
+        data: latestActivity.reps,
+        backgroundColor: [
+            '#970C3C',  // Set 1
+            '#7FB3D5',  // Set 2
+            '#D4A59A',  // Set 3
+            '#2E8B57',  // Set 4
+            '#FFA500',  // Set 5
+            '#9370DB'   // Set 6
+        ].slice(0, latestActivity.reps.length)
+    }];
+
     bodyweightChart.update();
 }
 
 // Initialize all charts
 function initAllCharts() {
+    console.log('Initializing all charts...');
     initActivityDurationChart();
     initStrengthChart();
     initStepsChart();
     initBodyweightChart();
+    
+    // Fetch data after charts are initialized
+    fetchActivityData();
 }
 
 // Update all charts
@@ -363,23 +545,36 @@ function updateAllCharts() {
 
 // Event listeners
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM Content Loaded - Setting up charts...');
     initAllCharts();
-    fetchActivityData();
 
     // Time range change
-    document.getElementById('timeRange').addEventListener('change', (e) => {
+    document.getElementById('timeRange')?.addEventListener('change', (e) => {
+        console.log('Time range changed:', e.target.value);
         fetchActivityData(e.target.value);
     });
 
     // Cardio type filter
-    document.getElementById('cardioType').addEventListener('change', updateActivityDurationChart);
+    document.getElementById('cardioType')?.addEventListener('change', () => {
+        console.log('Cardio type changed');
+        updateActivityDurationChart();
+    });
 
     // Strength exercise filter
-    document.getElementById('strengthSelect').addEventListener('change', updateStrengthChart);
+    document.getElementById('strengthSelect')?.addEventListener('change', () => {
+        console.log('Strength exercise changed');
+        updateStrengthChart();
+    });
 
     // Steps view filter
-    document.getElementById('stepsView').addEventListener('change', updateStepsChart);
+    document.getElementById('stepsView')?.addEventListener('change', () => {
+        console.log('Steps view changed');
+        updateStepsChart();
+    });
 
-    // Bodyweight view filter
-    document.getElementById('bodyweightView').addEventListener('change', updateBodyweightChart);
+    // Bodyweight exercise filter
+    document.getElementById('bodyweightSelect')?.addEventListener('change', () => {
+        console.log('Bodyweight exercise changed');
+        updateBodyweightChart();
+    });
 });

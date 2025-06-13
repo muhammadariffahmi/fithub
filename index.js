@@ -243,8 +243,32 @@ app.post('/logout', (req, res) => {
     res.redirect('/');
 })
 
+//Added API endpoint for activities for progress page(Nabil)
+app.get('/api/activities', requireLogin, async (req, res) => {
+    try {
+        const timeRange = parseInt(req.query.timeRange) || 7; // Default to 7 days
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - timeRange);
 
+        const activities = await Activity.find({
+            user: req.session.user_id,
+            datetime: { $gte: startDate }
+        }).sort({ datetime: 1 });
 
+        // Process activities to include activity type labels
+        const processedActivities = activities.map(activity => {
+            const activityObj = activity.toObject();
+            activityObj.activityTypeLabel = activityTypeMap[activity.activityType] || "Unknown";
+            return activityObj;
+        });
+
+        res.json(processedActivities);
+    } catch (error) {
+        console.error("Error fetching activities:", error);
+        res.status(500).json({ error: "Failed to fetch activities" });
+    }
+});
+//New code ends here(Nabil)
 
 //command to run the app with nodemon: npm run server
 //command to run the app without nodemon: node index.js
