@@ -23,6 +23,12 @@
     <!-- Title -->
     <h2 class="text-center mb-4">Login</h2>
 
+    <% if (typeof error !== 'undefined') { %>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+    <% } %>
+
     <!-- Form -->
     <form action="/login" method="POST" onsubmit="redirectHome(event)">
 

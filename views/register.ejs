@@ -21,6 +21,12 @@
 
     <h2 class="text-center mb-4">Create Account</h2>
 
+    <% if (typeof error !== 'undefined') { %>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+    <% } %>
+
     <!-- Form -->
     <form action="/register" method="POST" onsubmit="redirectHome(event)">
 

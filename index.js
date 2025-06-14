@@ -176,8 +176,9 @@ app.get('/dashboard', async (req, res) => {
 });
 
 
-app.get('/profile', requireLogin,(req, res) => {
-  res.render('profile'); 
+app.get('/profile', requireLogin, async (req, res) => {
+  const user = await User.findById(req.session.user_id);
+  res.render('profile', { user });
 });
 
 app.get('/register', (req, res) => {
@@ -218,11 +219,21 @@ app.delete('/activities/:id', async (req, res) => {
 });
 
 app.post('/register', async (req,res) => {
-  const { name, email, password } = req.body;
-  const user = new User({ name, email, password });
-  await user.save();
-  req.session.user_id = user._id;
-  res.redirect('/dashboard');
+  try {
+    const { name, email, password } = req.body;
+    const user = new User({ name, email, password });
+    await user.save();
+    req.session.user_id = user._id;
+    res.redirect('/dashboard');
+  } catch (err) {
+    if (err.code === 11000) {
+      // Duplicate key error (email already exists)
+      res.render('register', { error: 'Email already registered. Please use a different email.' });
+    } else {
+      console.error('Registration error:', err);
+      res.render('register', { error: 'An error occurred during registration. Please try again.' });
+    }
+  }
 })
 
 app.post('/login', async (req, res) => {
@@ -233,7 +244,7 @@ app.post('/login', async (req, res) => {
         res.redirect('/dashboard');
     }
     else {
-        res.redirect('/login')
+        res.render('login', { error: 'Invalid email or password.' });
     }
 })
 
@@ -269,6 +280,53 @@ app.get('/api/activities', requireLogin, async (req, res) => {
     }
 });
 //New code ends here(Nabil)
+
+app.post('/profile', requireLogin, async (req, res) => {
+  try {
+    const { name, email, age, weight, height, gender } = req.body;
+    const user = await User.findByIdAndUpdate(
+      req.session.user_id,
+      { name, email, age, weight, height, gender },
+      { new: true, runValidators: true }
+    );
+    res.render('profile', { user, profileMessage: 'Profile updated successfully!' });
+  } catch (err) {
+    let profileError = 'An error occurred while updating your profile.';
+    if (err.code === 11000) {
+      profileError = 'Email already registered. Please use a different email.';
+    }
+    const user = await User.findById(req.session.user_id);
+    res.render('profile', { user, profileError });
+  }
+});
+
+app.post('/change-password', requireLogin, async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    const user = await User.findById(req.session.user_id);
+    const isMatch = await user.constructor.findAndValidate(user.email, currentPassword);
+    if (!isMatch) {
+      return res.render('profile', { user, passwordError: 'Current password is incorrect.' });
+    }
+    user.password = newPassword;
+    await user.save();
+    res.render('profile', { user, passwordMessage: 'Password changed successfully!' });
+  } catch (err) {
+    const user = await User.findById(req.session.user_id);
+    res.render('profile', { user, passwordError: 'An error occurred while changing your password.' });
+  }
+});
+
+app.post('/delete-account', requireLogin, async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.session.user_id);
+    req.session.user_id = null;
+    res.redirect('/');
+  } catch (err) {
+    const user = await User.findById(req.session.user_id);
+    res.render('profile', { user, error: 'Failed to delete account.' });
+  }
+});
 
 //command to run the app with nodemon: npm run server
 //command to run the app without nodemon: node index.js
