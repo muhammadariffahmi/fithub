@@ -300,6 +300,22 @@ app.post('/profile', requireLogin, async (req, res) => {
   }
 });
 
+app.get('/profile/data', requireLogin, async (req, res) => {
+  try {
+    const user = await User.findById(req.session.user_id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const { age, weight, height, gender } = user;
+    res.json({ age, weight, height, gender });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch profile data" });
+  }
+});
+//Hassan added so calculator can function
+
 app.post('/change-password', requireLogin, async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;

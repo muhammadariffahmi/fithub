@@ -1,4 +1,4 @@
-document.getElementById("profile").addEventListener("submit", function (e) {
+document.getElementById("profile-update").addEventListener("submit", function (e) {
     e.preventDefault(); // prevent actual form submission
 
     // Get user inputs
