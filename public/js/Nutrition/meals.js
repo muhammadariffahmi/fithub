@@ -8,6 +8,7 @@ async function fetchMeals() {
     const data = await response.json();
     mealData = data.meals || [];  // Get the list of meals from the API response
     renderMeals();
+    return mealData; // Return the meal data
 }
 
 const calorieMap = {
@@ -283,7 +284,7 @@ function renderIntakeList() {
 
 
 // Initialize favourites on page load
-window.onload = function () {
-    fetchMeals();
-    renderFavoriteMeals();
+window.onload = async function () {
+    await fetchMeals(); // Wait for meals to be fetched
+    renderFavoriteMeals(); // Now render favorites after meals are loaded
 }
